@@ -1,3 +1,24 @@
+## Icons
+```bash
+npm i --save @fortawesome/fontawesome-svg-core
+```
+```bash
+npm i --save @fortawesome/free-solid-svg-icons
+```
+```bash
+npm i --save @fortawesome/free-regular-svg-icons
+```
+```bash
+npm i --save @fortawesome/react-fontawesome@latest
+```
+## Axios para hacer las peticiones
+```bash
+npm i --save axios
+```
+## React Router DOM para movernos entre paginas
+```bash
+npm i --save react-router-dom
+```
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
