@@ -38,6 +38,7 @@ export default class Login extends Component{
                     console.log(response.data);
                     localStorage.setItem('userIdLocal', response.data.user_id);
                     localStorage.setItem('tokenLocal', response.data.token);
+                    localStorage.setItem('isManager', response.data.is_superuser);
                     alert("Inicio de sesión exitoso");
                 })
                 .catch((error) => {
