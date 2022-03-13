@@ -2,7 +2,12 @@
 // import './App.css';
 import Login from './components/UsuarioLogin/Login';
 import Menu from './components/Menu/Menu';
+import Register from './components/UsuarioRegistro/Register';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
+
 
 function App() {
   return (
@@ -10,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/home' element={<Menu/>}/>
+        <Route path='/registro' element={<Register/>}/>
       </Routes>
     </BrowserRouter>
   );
