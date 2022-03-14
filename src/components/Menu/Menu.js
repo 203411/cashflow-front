@@ -12,8 +12,28 @@ export default class Menu extends Component{
     render(){
         return(
         <div>
-            {this.state.isManager}
+            {this.state.isManager==="true" ? <Manager/> : <Worker/>}
         </div>
+        );
+    }
+}
+
+class Manager extends Component{
+    render(){
+        return(
+            <div>
+                <h1>Manager interface</h1>
+            </div>
+        );
+    }
+}
+
+class Worker extends Component{
+    render(){
+        return(
+            <div>
+                <h1>Worker interface</h1>
+            </div>
         );
     }
 }
