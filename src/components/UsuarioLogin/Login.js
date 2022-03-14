@@ -40,9 +40,10 @@ export default class Login extends Component{
                     localStorage.setItem('tokenLocal', response.data.token);
                     localStorage.setItem('isManager', response.data.is_superuser);
                     alert("Inicio de sesión exitoso");
+                    window.location = "/home";
                 })
                 .catch((error) => {
-                    console.log(error.response.data);
+                    console.log(error.response);
                     if(error.response.data.non_field_errors !== null){
                         alert("Datos incorrectos");
                     }
@@ -91,11 +92,11 @@ export default class Login extends Component{
                     <div className={StyleLogin.formContainer}>
                         <div className={StyleLogin.group}>
                             <input onChange={this.setUsername} placeholder='Nombre de usuario' id="user"/>
-                            <FontAwesomeIcon icon={faUser} className={StyleLogin.icon} id={StyleLogin.userIcon}/>
+                            {/* <FontAwesomeIcon icon={faUser} className={StyleLogin.icon} id={StyleLogin.userIcon}/> */}
                         </div>
                         <div className={StyleLogin.group}>
                             <input onChange={this.setPassword} placeholder='Contraseña' type="password" id="pass"/>
-                            <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/>
+                            {/* <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/> */}
                         </div>
                         <button id={StyleLogin.subtitle} onClick={this.consumir_login}>Iniciar sesión</button>
                     </div>
