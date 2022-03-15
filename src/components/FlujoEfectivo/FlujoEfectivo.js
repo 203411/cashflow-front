@@ -6,7 +6,6 @@ import SelectsCategorias from "./SelectsCategorias";
 import Fila from './Fila';
 
 export default function FlujoEfectivo()  {
-    
 
     const [categoria, setCategoria] = useState('');
     const [descripcion, setDescripcion] = useState('');
@@ -25,7 +24,7 @@ export default function FlujoEfectivo()  {
             }
         }).then((response)=>{
             setListFlujos(response.data);
-        
+
         }).catch((error)=>{
             alert("nosepudooiga");
         })
@@ -48,23 +47,23 @@ export default function FlujoEfectivo()  {
     },[]);
 
     const agregar_flujos = () =>{
-        
+
         const data = {
             id_categoria : categoria,
             descripcion : descripcion,
             cantidad : cantidad,
             tipo : tipo
         }
-        console.log(data)
-        // axios.post("http://localhost:8000/cash_flow/flujo/efectivo",data,{
-        //     headers :{
-        //         'Authorization': 'Token ' + token,
-        //     }
-        // }).then((response)=>{
-        //     get_flujos();
-        // }).catch((error)=>{
-        //     console.log(error.response.data);
-        // })
+        
+        axios.post("http://localhost:8000/cash_flow/flujo/efectivo",data,{
+            headers :{
+                'Authorization': 'Token ' + token,
+            }
+        }).then((response)=>{
+            get_flujos();
+        }).catch((error)=>{
+            console.log(error.response.data);
+        })
     }
 
     return (
@@ -128,7 +127,7 @@ export default function FlujoEfectivo()  {
                             </tr>
                         </thead>
                         <tbody>
-                            {listFlujos.length > 0 ? 
+                            {listFlujos.length > 0 ?
                                 (listFlujos.map((el)=>(<Fila
                                     key = {el.id}
                                     el = {el}
