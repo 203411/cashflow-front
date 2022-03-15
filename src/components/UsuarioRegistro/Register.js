@@ -6,7 +6,8 @@ import './Register.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
+import { Link } from 'react-router-dom';
+import MenuCss from '../Menu/Menu.module.css'
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -28,14 +29,13 @@ class Register extends Component {
             
         };
     }
-   
 
     toggle() {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
     }
-    handleChange=async e=>{
+    handleChange= async e=>{
       e.persist();
       await this.setState({
         usuario:{
@@ -80,7 +80,6 @@ class Register extends Component {
       })
     }
     consumir_register = () => {
-     
       var postData = {
           username:this.state.usuario.username,
           password: this.state.usuario.password,
@@ -159,7 +158,6 @@ class Register extends Component {
         })}
       </tbody>
             </Table>
-           
                 </div>
                 <Link to="home" className={MenuCss.link}>Home</Link>
                 <div className={StyleLogin.container}>

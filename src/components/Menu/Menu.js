@@ -16,7 +16,7 @@ export default class Menu extends Component{
     render(){
         return(
             <div className={MenuCss.body}>
-            <Outlet/>
+            {/* <Outlet/> */}
             <div className={MenuCss.container}>
                 {this.state.isManager==="true" ? <Manager/> : (this.state.isManager==="false" ? <Worker/> : <div><h1>Sin acceso</h1></div>)}
             </div>
@@ -37,7 +37,7 @@ class Manager extends Component{
                     <button>Flujo de efectivo</button>
                     <button>Generar reporte</button>
                 </div>
-                <Link className={MenuCss.link} to="registro" id={MenuCss.register}>Registro</Link>
+                <Link className={MenuCss.link} to="/registro" id={MenuCss.register}>Registro</Link>
             </div>
         );
     }

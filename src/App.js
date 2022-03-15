@@ -15,9 +15,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='/home/*' element={<Menu />}>
-                    <Route path='registro' element={<Register />} />
-                </Route>
+                <Route path='/home/*' element={<Menu />}/>
+                <Route path='/registro' element={<Register />} />
                 <Route path='/flujo' element={<FlujoEfectivo />} />
             </Routes>
         </BrowserRouter>
