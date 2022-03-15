@@ -25,7 +25,7 @@ export default function FlujoEfectivo()  {
             }
         }).then((response)=>{
             setListFlujos(response.data);
-           
+        
         }).catch((error)=>{
             alert("nosepudooiga");
         })

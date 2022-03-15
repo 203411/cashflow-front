@@ -113,6 +113,7 @@ class Register extends Component {
           console.log(error.message);
         })
         }
+
         componentDidMount() {
           this.peticionGet();
         }
