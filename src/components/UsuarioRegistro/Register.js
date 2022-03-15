@@ -119,7 +119,7 @@ class Register extends Component {
         }
 
     render() {
-        const { usuario } = this.state.usuario;
+        const { username,password,password2,email } = this.state.usuario;
         const inputStyle = {
             borderRadius: '100px',
             padding: '18px 52px'
@@ -172,7 +172,7 @@ class Register extends Component {
                                 name="username"
                                 id="username"
                                 placeholder="Usuario"
-                                value={usuario?usuario.username:''}
+                                value={username}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
@@ -185,7 +185,7 @@ class Register extends Component {
                                 placeholder="Email"
                                 valid={this.state.usuario.validate.emailState === "has-success"}
                                 invalid={this.state.usuario.validate.emailState === "has-danger"}
-                                value={usuario?usuario.email:''}
+                                value={email}
                                 onChange={(e) => {
                                     this.validateEmail(e);
                                     this.handleChange(e);
@@ -205,7 +205,7 @@ class Register extends Component {
                                 name="password"
                                 id="password"
                                 placeholder="Contraseña"
-                                value={usuario?usuario.password:''}
+                                value={password}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
@@ -216,7 +216,7 @@ class Register extends Component {
                                 name="password2"
                                 id="password2"
                                 placeholder="Confirmar Contraseña"
-                                value={usuario?usuario.password2:''}
+                                value={password2}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
