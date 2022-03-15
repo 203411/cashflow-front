@@ -65,6 +65,20 @@ class Register extends Component {
         e.preventDefault();
         console.log(`Email: ${this.state.email}`);
     }
+
+    seleccionarUsuario=(user)=>{
+      this.setState({
+        
+        usuario: {
+          id: user.id,
+          username: user.username,
+          password: user.password,
+          password2: user.password2,
+          email:user.email,
+          is_gerente: user.is_superuser,
+        }
+      })
+    }
     consumir_register = () => {
      
       var postData = {
@@ -75,7 +89,7 @@ class Register extends Component {
           is_superuser:this.state.usuario.is_gerente
       }
       axios
-          .post("http://localhost:8000/cash_flow/registro/new/", postData, {
+          .post("http://localhost:8000/cash_flow/registro/lista/", postData, {
               Headers: { 'Content-Type': 'application/json', }
           })
           .then((response) => {
@@ -85,6 +99,12 @@ class Register extends Component {
           .catch((error) => {
             alert("usuario no registrado!");
           })
+      }
+      peticionDelete=()=>{
+        axios.delete("http://localhost:8000/cash_flow/registro/user/"+this.state.usuario.id).then(response=>{
+          this.setState({modalEliminar: false});
+          this.peticionGet();
+        })
       }
       peticionGet=()=>{
         axios.get("http://localhost:8000/cash_flow/registro/lista/").then(response=>{
@@ -99,7 +119,7 @@ class Register extends Component {
         }
 
     render() {
-        const { username, password, password2, email, is_gerente } = this.state.usuario;
+        const { usuario } = this.state.usuario;
         const inputStyle = {
             borderRadius: '100px',
             padding: '18px 52px'
@@ -130,15 +150,16 @@ class Register extends Component {
           <td>{user.email}</td>
           <td>{user.is_superuser===true ? "SI" : "No"}</td>
           <td>
-                <button  className="btn btn-primary btn-sm" onClick={()=>{}}><FontAwesomeIcon icon={faEdit}/></button>
+                <button  className="btn btn-primary btn-sm" ><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
-                <button className="btn btn-danger btn-sm" onClick={()=>{}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                <button className="btn btn-danger btn-sm" ><FontAwesomeIcon icon={faTrashAlt}/></button>
           </td>
           </tr>
           )
         })}
       </tbody>
             </Table>
+           
                 </div>
 
                 <div className={StyleLogin.container}>
@@ -151,7 +172,7 @@ class Register extends Component {
                                 name="username"
                                 id="username"
                                 placeholder="Usuario"
-                                value={username}
+                                value={usuario?usuario.username:''}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
@@ -164,7 +185,7 @@ class Register extends Component {
                                 placeholder="Email"
                                 valid={this.state.usuario.validate.emailState === "has-success"}
                                 invalid={this.state.usuario.validate.emailState === "has-danger"}
-                                value={email}
+                                value={usuario?usuario.email:''}
                                 onChange={(e) => {
                                     this.validateEmail(e);
                                     this.handleChange(e);
@@ -184,7 +205,7 @@ class Register extends Component {
                                 name="password"
                                 id="password"
                                 placeholder="Contraseña"
-                                value={password}
+                                value={usuario?usuario.password:''}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
@@ -195,7 +216,7 @@ class Register extends Component {
                                 name="password2"
                                 id="password2"
                                 placeholder="Confirmar Contraseña"
-                                value={password2}
+                                value={usuario?usuario.password2:''}
                                 onChange={(e) => this.handleChange(e)}
                             />
                         </FormGroup>
