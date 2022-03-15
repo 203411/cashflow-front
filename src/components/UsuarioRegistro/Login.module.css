@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    overflow: hidden;
+}
+
+.body{
+    background: white;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background{
+    background: linear-gradient(148.34deg, #ffffff 0%, rgba(11, 11, 19, 0.9) 91.51%);
+    width: 60%;
+    min-height: 100vh;
+}
+
+.background .containerBackground{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+}
+
+.circleBorder{
+    position: absolute;
+    width: 60vh;
+    height: 60vh;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+}
+
+#circleTop{
+    left: -30vh;
+    top: -30vh;
+}
+
+#circleBottom{
+    left: 87vh;
+    top: 70vh;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.container .formContainer{
+    display: flex;
+    flex-flow: column;
+    width: 60%;
+}
+
+.formContainer button{
+    padding: 18px 26px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    background: #517EA6;
+    cursor: pointer;
+}
+
+.formText{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.title{
+    color: #333333;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+#title{
+    color: white;
+    font-size: 40px;
+}
+
+#subtitle{
+    color: white;
+    font-weight: 400;
+}
+
+.subtitle{
+    color: #333333;
+    font-weight:normal;
+    font-size: 18px;
+}
+
+.icon{
+    color: rgba(51, 51, 51,0.6); 
+    position: absolute;
+    z-index: 100;
+    left: 70%; 
+    font-size: 18px;
+}
+
+#passIcon{
+    bottom: 43.7%;
+    cursor: pointer;
+}
+
+#userIcon{
+    bottom: 52.7%;
+}
+
+.group{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.group input{
+    padding: 18px 52px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: 1px solid #B4C7D8;
+}
