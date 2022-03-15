@@ -16,6 +16,12 @@ export default class Login extends Component{
         }
     }
 
+    componentDidMount(){
+        localStorage.removeItem('userIdLocal')
+        localStorage.removeItem('tokenLocal')
+        localStorage.removeItem('isManager')
+    }
+
     consumir_login = () =>{
         var postData={
             username: this.state.username,
@@ -40,6 +46,7 @@ export default class Login extends Component{
                     localStorage.setItem('tokenLocal', response.data.token);
                     localStorage.setItem('isManager', response.data.is_superuser);
                     alert("Inicio de sesión exitoso");
+                    document.getElementById("user").value = "";
                     window.location = "/home";
                 })
                 .catch((error) => {
@@ -91,11 +98,11 @@ export default class Login extends Component{
                     </div>
                     <div className={StyleLogin.formContainer}>
                         <div className={StyleLogin.group}>
-                            <input onChange={this.setUsername} placeholder='Nombre de usuario' id="user"/>
+                            <input onChange={this.setUsername} onBlur={this.setUsername} placeholder='Nombre de usuario' id="user"/>
                             {/* <FontAwesomeIcon icon={faUser} className={StyleLogin.icon} id={StyleLogin.userIcon}/> */}
                         </div>
                         <div className={StyleLogin.group}>
-                            <input onChange={this.setPassword} placeholder='Contraseña' type="password" id="pass"/>
+                            <input onChange={this.setPassword} onBlur={this.setPassword} placeholder='Contraseña' type="password" id="pass"/>
                             {/* <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/> */}
                         </div>
                         <button id={StyleLogin.subtitle} onClick={this.consumir_login}>Iniciar sesión</button>

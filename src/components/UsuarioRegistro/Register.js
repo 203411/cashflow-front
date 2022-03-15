@@ -3,6 +3,8 @@ import { Form, FormFeedback, FormGroup, FormText, Label, Input, Button, ButtonDr
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StyleLogin from '../UsuarioLogin/Login.module.css';
 import './Register.css';
+import { Link } from 'react-router-dom';
+import MenuCss from '../Menu/Menu.module.css';
 
 class Register extends Component {
     constructor(props) {
@@ -73,7 +75,7 @@ class Register extends Component {
                     <div className={StyleLogin.circleBorder} id={StyleLogin.circleTop}></div>
                     <div className={StyleLogin.circleBorder} id={StyleLogin.circleBottom}></div>
                 </div>
-
+                <Link to="home" className={MenuCss.link}>Home</Link>
                 <div className={StyleLogin.container}>
                     <h2 className={StyleLogin.title}>Registro de usuario</h2>
                     <Form className="form" onSubmit={(e) => this.submitForm(e)}>

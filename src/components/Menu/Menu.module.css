@@ -1,0 +1,46 @@
+
+.body{
+    background: linear-gradient(148.34deg, #3737DE 0%, rgba(11, 11, 19, 0.9) 91.51%);
+    min-height: 100vh;
+}
+
+.body h1{
+    color: white;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.containerOptions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerOptions button{
+    padding: 18px 52px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    background: #dadada;
+    cursor: pointer;
+    margin: 0 20px 0 20px;
+}
+
+.link{
+    padding: 18px 52px;
+    font-size: 20px;
+    border-radius: 30px;
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+}
+
+#register{
+    top:0;
+    right: 0;
+}
