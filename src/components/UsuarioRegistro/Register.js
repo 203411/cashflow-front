@@ -127,7 +127,7 @@ class Register extends Component {
 
         return (
             <div className={StyleLogin.body}>
-              
+              <br/><br/><br/>
                 <div className={StyleLogin.background}>
                 <h2 className={StyleLogin.title}>Crud usuario</h2>
                 <br/><br/><br/>
