@@ -160,7 +160,7 @@ class Register extends Component {
       </tbody>
             </Table>
                 </div>
-                <Link to="home" className={MenuCss.link}>Home</Link>
+                <Link to="/home" className={MenuCss.link}>Home</Link>
                 <div className={StyleLogin.container}>
                 <h2 className={StyleLogin.title}>Registro</h2>
                     <Form className="form" onSubmit={(e) => this.submitForm(e)}>
@@ -220,7 +220,7 @@ class Register extends Component {
                             />
                         </FormGroup>
                         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                            <DropdownToggle caret color="info" style={{ borderRadius: '100px', boxShadow : 'none'}} size="md" block children={this.state.is_gerente != null ? (this.state.is_gerente === "true" ? "Gerente": "Cajero") : "Seleccione tipo usuario" }>
+                            <DropdownToggle caret color="info" style={{ borderRadius: '100px', boxShadow : 'none'}} size="md" block children={this.state.usuario.is_gerente === "true" ? "Gerente" : (this.state.usuario.is_gerente === "false" ? "Cajero" : "Seleccione tipo usuario") }>
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem header>Tipo Usuario</DropdownItem>

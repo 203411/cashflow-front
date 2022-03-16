@@ -33,8 +33,8 @@ class Manager extends Component{
         return(
             <div>
                 <div className={MenuCss.containerOptions}>
-                    <button>Categorias</button>
-                    <button>Flujo de efectivo</button>
+                    <Link to="/categorias"><button>Categorias</button></Link>
+                    <Link to="/flujo"><button>Flujo de efectivo</button></Link>
                     <button>Generar reporte</button>
                 </div>
                 <Link className={MenuCss.link} to="/registro" id={MenuCss.register}>Registro</Link>
