@@ -148,7 +148,7 @@ class Register extends Component {
           <td>{user.id}</td>
           <td>{user.username}</td>
           <td>{user.email}</td>
-          <td>{user.is_superuser===true ? "SI" : "No"}</td>
+          <td>{user.is_superuser===true ? "Si" : "No"}</td>
           <td>
                 <button  className="btn btn-primary btn-sm" ><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}

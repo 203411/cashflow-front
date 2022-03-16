@@ -74,7 +74,7 @@ export default function FlujoEfectivo()  {
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Categoria:</label>
-                    <select class="custom-select" onChange={(e)=> setCategoria(e.target.value)}>
+                    <select className="custom-select" onChange={(e)=> setCategoria(e.target.value)}>
                         {listCategorias.length > 0 ?
                             (listCategorias.map((el)=>(<SelectsCategorias
                                 key = {el.id}
@@ -88,30 +88,30 @@ export default function FlujoEfectivo()  {
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Descripcion:</label>
-                    <div class="input-group" aria-label="Descripcion del flujo de efectivo a agregar">
-                        <textarea class="form-control" onChange={(e)=> setDescripcion(e.target.value)} aria-label="With textarea" placeholder="Descripcion acerca del flujo "></textarea>
+                    <div className="input-group" aria-label="Descripcion del flujo de efectivo a agregar">
+                        <textarea className="form-control" onChange={(e)=> setDescripcion(e.target.value)} aria-label="With textarea" placeholder="Descripcion acerca del flujo "></textarea>
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Cantidad:</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">$</span>
                         </div>
-                        <input type="number" class="form-control" onChange={(e)=> setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" />
+                        <input type="number" className="form-control" onChange={(e)=> setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" />
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-3 p-2" controlId="formBasicPassword">
                     <label>Tipo:</label>
-                    <div class="input-group mb-3">
-                        <select class="custom-select" onChange={(e)=> setTipo(e.target.value)}>
+                    <div className="input-group mb-3">
+                        <select className="custom-select" onChange={(e)=> setTipo(e.target.value)}>
                             <option value={"Entrada"}>Entrada</option>
                             <option value={"Salida"}>Salida</option>
                         </select>
                     </div>
                 </Form.Group>
                 <div style={{ textAlign: 'Center' }} className='mb-3'>
-                    <Button onClick={()=> agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md" block>Registrar</Button>
+                    <Button onClick={()=> agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md">Registrar</Button>
                 </div>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Table striped bordered hover variant="dark">
