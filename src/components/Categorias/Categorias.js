@@ -7,6 +7,7 @@ import { Form, Table, Button, Modal } from 'react-bootstrap';
 export default function Categorias() {
     const token = localStorage.getItem('tokenLocal');
 
+    const [idCategoria, setIdCategoria] = useState(-1);
     const [clasificacion, setClasificacion] = useState('');
     const [categoria, setCategoria] = useState('');
     const [subCategoria, setSubCategoria] = useState('');
@@ -15,7 +16,10 @@ export default function Categorias() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (el) =>{
+        setShow(true)
+        rellenarModal(el.id)
+    };
 
     
     const get_categorias = () => {
@@ -36,17 +40,9 @@ export default function Categorias() {
         get_categorias();
     },[]);
 
-    const optionClasificacion = ['Seleccione una clasificación', 'Costo-Venta', 'Egreso']
+    const optionClasificacion = ['Costo-Venta', 'Egreso']
     
     const agregar_categoria = () => {
-        for (let index = 0; index < listCategorias.length; index++) {
-            const element = listCategorias[index];
-            if (clasificacion === element.clasificacion && categoria === element.descripcion && subCategoria === element.sub_categoria) {
-                console.log("Editar function");
-                editar_categoria(listCategorias[index].id)
-                index = listCategorias.length
-            }
-        }
         if (clasificacion === null && categoria === "" && subCategoria === "") {
             alert("Debes rellenar todos los campos")
         } else if (clasificacion === null) {
@@ -69,7 +65,7 @@ export default function Categorias() {
                         'Authorization': 'Token ' + token,
                     }
                 }).then((response) => {
-                    document.getElementById("clasificacion").value = optionClasificacion[0];
+                    get_categorias()
                     document.getElementById("categoria").value = "";
                     document.getElementById("sub_categoria").value = "";
                 }).catch((error) => {
@@ -79,7 +75,7 @@ export default function Categorias() {
         // console.log(postData);
     }
 
-    const editar_categoria = (idCategoria) => {
+    const rellenarModal = (idCategoria) => {
         axios
             .get("http://localhost:8000/cash_flow/categorias/options/" + idCategoria, {
                 headers: {
@@ -88,10 +84,49 @@ export default function Categorias() {
             })
             .then((response) => {
                 console.log(response.data)
+                setIdCategoria(response.data.id)
+                document.getElementById("modalCategoria").value = response.data.descripcion
+                document.getElementById("modalSubCategoria").value = response.data.sub_categoria
+                setClasificacion(response.data.clasificacion)
+                setCategoria(response.data.descripcion)
+                setSubCategoria(response.data.sub_categoria)
             })
             .catch((error) => {
                 console.log(error.response.data)
             })
+    }
+
+    const editar_categoria = (idCategoria) => {
+        if (clasificacion === null && categoria === "" && subCategoria === "") {
+            alert("Debes rellenar todos los campos")
+        } else if (clasificacion === null) {
+            alert("El campo clasificacion no puede estar vacio")
+        } else if (categoria === "") {
+            alert("El campo categoria no puede estar vacio")
+        } else if (subCategoria === "") {
+            alert("El campo sub-categoria no puede estar vacio")
+        } else {
+            var putData = {
+                clasificacion: clasificacion,
+                descripcion: categoria,
+                sub_categoria: subCategoria,
+            }
+            axios
+                .put("http://localhost:8000/cash_flow/categorias/options/" + idCategoria.idCategoria, putData,{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + token,
+                    }
+                })
+                .then((response) => {
+                    get_categorias()
+                    console.log(response.data)
+                })
+                .catch((error) => {
+                    console.log(error.response.data)
+                })
+            handleClose()
+        }
     }
 
     return (
@@ -102,7 +137,8 @@ export default function Categorias() {
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Clasificacion:</label>
-                    <select class="custom-select" onChange={(e) => setClasificacion(e.target.value === "Seleccione una clasificación" ? null : e.target.value)} id="clasificacion">
+                    <select class="custom-select" onChange={(e) => setClasificacion(e.target.value === 'Seleccione una clasificación' ? null : e.target.value)} id="clasificacion">
+                        <option>Seleccione una clasificación</option>
                         {optionClasificacion.length > 0 ?
                             (optionClasificacion.map((value) =>
                                 <option value={value}>{value}</option>
@@ -147,7 +183,7 @@ export default function Categorias() {
                                         <td>{value.descripcion}</td> {/*muestra la categoria*/}
                                         <td>{value.sub_categoria}</td>
                                         <td>
-                                            <button className="btn btn-primary btn-sm" onClick={handleShow}><FontAwesomeIcon icon={faEdit} /></button>{"   "}
+                                            <Button className="btn btn-primary btn-sm" onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button  >{"   "}
                                         </td>
                                     </tr>
                                 ))
@@ -165,16 +201,36 @@ export default function Categorias() {
             </Form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Editar categoria <p id="idCategoria"></p></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
+                            <label>Clasificacion:</label>
+                            <select class="custom-select" onChange={(e) => setClasificacion(e.target.value)}>
+                                {optionClasificacion.length > 0 ?
+                                    (optionClasificacion.map((value) => (value===clasificacion ?  <option value={clasificacion} selected>{clasificacion}</option> :<option value={value}>{value}</option>))) : (<option value={"0"}>No hay clasificaciones registradas</option>)
+                                }
+                            </select>
+                        </Form.Group>
+                        <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
+                            <label>Categoria:</label>
+                            <div className="input-group mb-3">
+                                <input type="text" className="form-control" onChange={(e) => setCategoria(e.target.value)} placeholder="Categoria " aria-label="Amount (to the nearest dollar)" id="modalCategoria" />
+                            </div>
+                        </Form.Group>
+                        <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
+                            <label>Sub-Categoria:</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" onChange={(e) => setSubCategoria(e.target.value)} placeholder="Sub-Categoria " aria-label="Amount (to the nearest dollar)" id="modalSubCategoria" />
+                            </div>
+                        </Form.Group>
+
+                    </Form>
+                </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
+                    <Button className="btn btn-secondary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={handleClose}>Cancelar</Button>
+                    <Button className="btn btn-primary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={() => editar_categoria({idCategoria})}>Guardar</Button>
                 </Modal.Footer>
             </Modal>
         </div>
