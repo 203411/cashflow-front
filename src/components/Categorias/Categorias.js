@@ -3,7 +3,6 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { Form, Table, Button, Modal } from 'react-bootstrap';
-
 export default function Categorias() {
     const token = localStorage.getItem('tokenLocal');
 
@@ -29,10 +28,8 @@ export default function Categorias() {
                     'Authorization': 'Token ' + token,
                 }
             }).then((response) => {
-                console.log(response.data)
                 setListCategorias(response.data)
             }).catch((error) => {
-                console.log(error.data)
             })
     }
 
@@ -69,10 +66,9 @@ export default function Categorias() {
                     document.getElementById("categoria").value = "";
                     document.getElementById("sub_categoria").value = "";
                 }).catch((error) => {
-                    console.log(error.response.data)
+                    alert("Categoria ya registrada");
                 })
         }
-        // console.log(postData);
     }
 
     const rellenarModal = (idCategoria) => {
@@ -92,7 +88,6 @@ export default function Categorias() {
                 setSubCategoria(response.data.sub_categoria)
             })
             .catch((error) => {
-                console.log(error.response.data)
             })
     }
 
@@ -120,12 +115,10 @@ export default function Categorias() {
                 })
                 .then((response) => {
                     get_categorias()
-                    console.log(response.data)
                 })
                 .catch((error) => {
-                    console.log(error.response.data)
                 })
-            handleClose()
+            handleClose();
         }
     }
 
@@ -167,7 +160,7 @@ export default function Categorias() {
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                {/* <th>#</th> */}
+                                <th>#</th>
                                 <th>Clasificacion</th>
                                 <th>Categoria</th>
                                 <th>Sub-Categoria</th>
@@ -178,7 +171,7 @@ export default function Categorias() {
                             {listCategorias.length > 0 ?
                                 (listCategorias.map((value) => (
                                     <tr>
-                                        {/* <td>{value.id}</td> */}
+                                        <td>{value.id}</td>
                                         <td>{value.clasificacion}</td>
                                         <td>{value.descripcion}</td> {/*muestra la categoria*/}
                                         <td>{value.sub_categoria}</td>

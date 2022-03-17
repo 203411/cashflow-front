@@ -26,7 +26,7 @@ export default function FlujoEfectivo()  {
             setListFlujos(response.data);
 
         }).catch((error)=>{
-            alert("nosepudooiga");
+            alert("No se obtuvieron los registros");
         })
     }
 
@@ -37,7 +37,6 @@ export default function FlujoEfectivo()  {
             }
         }).then((response)=>{
             setListCategorias(response.data);
-            console.log(listCategorias);
         })
     }
 
@@ -62,7 +61,7 @@ export default function FlujoEfectivo()  {
         }).then((response)=>{
             get_flujos();
         }).catch((error)=>{
-            console.log(error.response.data);
+            alert("No se pudo agregar")
         })
     }
 

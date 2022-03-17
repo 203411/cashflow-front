@@ -41,7 +41,6 @@ export default class Login extends Component{
                     'Content-Type': 'application/json',}
                 })
                 .then((response) => {
-                    console.log(response.data);
                     localStorage.setItem('userIdLocal', response.data.user_id);
                     localStorage.setItem('tokenLocal', response.data.token);
                     localStorage.setItem('isManager', response.data.is_superuser);
@@ -50,7 +49,6 @@ export default class Login extends Component{
                     window.location = "/home";
                 })
                 .catch((error) => {
-                    console.log(error.response);
                     if(error.response.data.non_field_errors !== null){
                         alert("Datos incorrectos");
                     }
