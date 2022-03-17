@@ -5,13 +5,15 @@ import StyleLogin from '../UsuarioRegistro/Login.module.css';
 import './Register.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faExclamationTriangle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faBan} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 
 export default function Register() {
 
   const token = localStorage.getItem('tokenLocal');
+  var clickEdit = faEdit;
+
   const [idRegistro, setIdRegistro]= useState('');
   const [username, setUsername]= useState('');
   const [password, setPassword]= useState('');
@@ -45,6 +47,7 @@ export default function Register() {
 
   useEffect(() => {
     get_registros();
+    document.getElementById("cancelar").hidden = true;
   }, []);
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -103,7 +106,6 @@ export default function Register() {
           setPassword2("");
           setIsGerente(null);
           setEmailValidate("")
-
           get_registros()
         })
         .catch((error) => {
@@ -115,7 +117,6 @@ export default function Register() {
 
   const peticionDelete = (user) =>{
     console.log(user.idRegistro)
-    console.log("click basura")
     axios
       .delete("http://localhost:8000/cash_flow/registro/user/" + user.idRegistro,{
         headers: { 
@@ -160,7 +161,7 @@ export default function Register() {
   }
 
   const rellenarForm = (idUser) =>{
-    console.log("usuario id: " + idUser.id);
+    document.getElementById("cancelar").hidden = false; //se muestra el boton para cancelar la edicion
     axios
       .get("http://localhost:8000/cash_flow/registro/user/" + idUser.id,{
         headers: { 
@@ -172,14 +173,22 @@ export default function Register() {
         setIdRegistro(response.data.id)
         document.getElementById("username").value = response.data.username
         document.getElementById("email").value = response.data.email
-        // document.getElementById("password").value = response.data.password
-        // document.getElementById("password2").value = response.data.password
         setUsername(response.data.username);
         setEmail(response.data.email);
         setIsGerente(response.data.is_superuser);
-        // setPassword(response.data.password);
-        // setPassword2(response.data.password);
       })
+  }
+
+  const limpiarForm = () =>{
+    //resetear los estados
+    setIdRegistro("");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPassword2("");
+    setIsGerente(null);
+    //ocultamos el boton
+    document.getElementById("cancelar").hidden = true;
   }
 
   const inputStyle = {
@@ -211,7 +220,7 @@ export default function Register() {
                     <td>{user.email}</td>
                     <td>{user.is_superuser === true ? "Si" : "No"}</td>
                     <td>
-                      <Button className="btn btn-primary btn-sm" style={{borderRadius : "5px", boxShadow : "none"}} onClick={() => rellenarForm(user)}><FontAwesomeIcon icon={faEdit} /></Button>
+                      <Button className="btn btn-primary btn-sm" style={{borderRadius : "5px", boxShadow : "none"}} onClick={(e) => rellenarForm(user)}><FontAwesomeIcon icon={faEdit}/></Button>
                       <Button className="btn btn-danger btn-sm" style={{borderRadius : "5px", boxShadow : "none"}} onClick={() => handleShow(user)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
                     </td>
                   </tr>
@@ -293,7 +302,8 @@ export default function Register() {
                 <DropdownItem name="is_gerente" onClick={(e) => setIsGerente(false)}>Cajero</DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <Button type="submit" onClick={() => consumir_register()} style={{ backgroundColor:'#dadada !important' ,borderRadius: '100px', boxShadow: 'none' , width:"100%"}} block>Registrar</Button>
+            <Button type="submit" onClick={() => consumir_register()} style={{ borderRadius: '100px', boxShadow: 'none' , width:"100%"}} block>Registrar</Button>
+            <Button type="submit" id='cancelar' onClick={() => limpiarForm()} style={{ borderRadius: '100px', boxShadow: 'none' , width:"100%"}} block>Cancelar</Button>
           </Form>
         </div>
         <Modal show={show} onHide={handleClose}>
