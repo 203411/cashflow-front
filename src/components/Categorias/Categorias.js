@@ -178,7 +178,7 @@ export default function Categorias() {
                         <tbody>
                             {listCategorias.length > 0 ?
                                 (listCategorias.map((value) => (
-                                    <tr>
+                                    <tr key={value.id}>
                                         {/* <td>{value.id}</td> */}
                                         <td>{value.clasificacion}</td>
                                         <td>{value.descripcion}</td> {/*muestra la categoria*/}
@@ -202,7 +202,7 @@ export default function Categorias() {
             </Form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Editar categoria <p id="idCategoria"></p></Modal.Title>
+                    <Modal.Title>Editar categoria</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
