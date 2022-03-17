@@ -101,7 +101,7 @@ export default class Login extends Component{
                         </div>
                         <div className={StyleLogin.group}>
                             <input onChange={this.setPassword} onBlur={this.setPassword} placeholder='Contraseña' type="password" id="pass"/>
-                            {/* <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/> */}
+                            <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/>
                         </div>
                         <button id={StyleLogin.subtitle} onClick={this.consumir_login}>Iniciar sesión</button>
                     </div>

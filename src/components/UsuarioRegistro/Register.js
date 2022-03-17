@@ -156,7 +156,11 @@ class Register extends Component {
             </tbody>
           </Table>
         </div>
-        <Link to="/home" className={MenuCss.link}>Home</Link>
+        <div style={{position: "absolute", right: "0", top : "0"}}>
+            <Link to="/home"><button style={{padding: "15px 40px", fontSize : "16px",borderRadius: "30px",border: "1px solid #000",background: "#dadada",cursor: "pointer",margin: "0 20px 0 20px"}}>
+                Home
+            </button></Link>
+        </div>
         <div className={StyleLogin.container}>
           <h2 className={StyleLogin.title}>Registro</h2>
           <Form className="form" onSubmit={(e) => this.submitForm(e)}>

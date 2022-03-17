@@ -3,6 +3,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { Form, Table, Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 export default function Categorias() {
     const token = localStorage.getItem('tokenLocal');
 
@@ -15,12 +17,12 @@ export default function Categorias() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = (el) =>{
+    const handleShow = (el) => {
         setShow(true)
         rellenarModal(el.id)
     };
 
-    
+
     const get_categorias = () => {
         axios
             .get("http://localhost:8000/cash_flow/categorias/options", {
@@ -28,17 +30,19 @@ export default function Categorias() {
                     'Authorization': 'Token ' + token,
                 }
             }).then((response) => {
+                console.log(response.data)
                 setListCategorias(response.data)
             }).catch((error) => {
+                console.log(error.data)
             })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         get_categorias();
-    },[]);
+    }, []);
 
     const optionClasificacion = ['Costo-Venta', 'Egreso']
-    
+
     const agregar_categoria = () => {
         if (clasificacion === null && categoria === "" && subCategoria === "") {
             alert("Debes rellenar todos los campos")
@@ -66,9 +70,10 @@ export default function Categorias() {
                     document.getElementById("categoria").value = "";
                     document.getElementById("sub_categoria").value = "";
                 }).catch((error) => {
-                    alert("Categoria ya registrada");
+                    console.log(error.response.data)
                 })
         }
+        // console.log(postData);
     }
 
     const rellenarModal = (idCategoria) => {
@@ -88,6 +93,7 @@ export default function Categorias() {
                 setSubCategoria(response.data.sub_categoria)
             })
             .catch((error) => {
+                console.log(error.response.data)
             })
     }
 
@@ -107,7 +113,7 @@ export default function Categorias() {
                 sub_categoria: subCategoria,
             }
             axios
-                .put("http://localhost:8000/cash_flow/categorias/options/" + idCategoria.idCategoria, putData,{
+                .put("http://localhost:8000/cash_flow/categorias/options/" + idCategoria.idCategoria, putData, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Token ' + token,
@@ -115,10 +121,12 @@ export default function Categorias() {
                 })
                 .then((response) => {
                     get_categorias()
+                    console.log(response.data)
                 })
                 .catch((error) => {
+                    console.log(error.response.data)
                 })
-            handleClose();
+            handleClose()
         }
     }
 
@@ -160,7 +168,7 @@ export default function Categorias() {
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                {/* <th>#</th> */}
                                 <th>Clasificacion</th>
                                 <th>Categoria</th>
                                 <th>Sub-Categoria</th>
@@ -171,7 +179,7 @@ export default function Categorias() {
                             {listCategorias.length > 0 ?
                                 (listCategorias.map((value) => (
                                     <tr>
-                                        <td>{value.id}</td>
+                                        {/* <td>{value.id}</td> */}
                                         <td>{value.clasificacion}</td>
                                         <td>{value.descripcion}</td> {/*muestra la categoria*/}
                                         <td>{value.sub_categoria}</td>
@@ -202,7 +210,7 @@ export default function Categorias() {
                             <label>Clasificacion:</label>
                             <select class="custom-select" onChange={(e) => setClasificacion(e.target.value)}>
                                 {optionClasificacion.length > 0 ?
-                                    (optionClasificacion.map((value) => (value===clasificacion ?  <option value={clasificacion} selected>{clasificacion}</option> :<option value={value}>{value}</option>))) : (<option value={"0"}>No hay clasificaciones registradas</option>)
+                                    (optionClasificacion.map((value) => (value === clasificacion ? <option value={clasificacion} selected>{clasificacion}</option> : <option value={value}>{value}</option>))) : (<option value={"0"}>No hay clasificaciones registradas</option>)
                                 }
                             </select>
                         </Form.Group>
@@ -223,9 +231,14 @@ export default function Categorias() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="btn btn-secondary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={handleClose}>Cancelar</Button>
-                    <Button className="btn btn-primary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={() => editar_categoria({idCategoria})}>Guardar</Button>
+                    <Button className="btn btn-primary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={() => editar_categoria({ idCategoria })}>Guardar</Button>
                 </Modal.Footer>
             </Modal>
+            <div style={{position: "absolute", left: "0" }}>
+                <Link to="/home"><button style={{padding: "15px 40px", fontSize : "16px",borderRadius: "30px",border: "none",background: "#dadada",cursor: "pointer",margin: "0 20px 0 20px"}}>
+                    Home
+                </button></Link>
+            </div>
         </div>
     );
 }

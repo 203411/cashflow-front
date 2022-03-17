@@ -4,6 +4,7 @@ import { Dropdown, Table, Button, ToggleButton, ToggleButtonGroup } from 'react-
 import { Form } from 'react-bootstrap';
 import SelectsCategorias from "./SelectsCategorias";
 import Fila from './Fila';
+import { Link } from 'react-router-dom';
 
 export default function FlujoEfectivo()  {
 
@@ -144,6 +145,11 @@ export default function FlujoEfectivo()  {
                     </Table>
                 </Form.Group>
             </Form>
+            <div style={{position: "absolute", left: "0" }}>
+                <Link to="/home"><button style={{padding: "15px 40px", fontSize : "16px",borderRadius: "30px",border: "none",background: "#dadada",cursor: "pointer",margin: "0 20px 0 20px"}}>
+                    Home
+                </button></Link>
+            </div>
         </div>
     );
 
