@@ -161,7 +161,7 @@ export default function Register() {
   }
 
   const rellenarForm = (idUser) =>{
-    document.getElementById("cancelar").hidden = false; //se muestra el boton para cancelar la edicion
+    document.getElementById("cancelar").hidden = false;  //se muestra el boton para cancelar la edicion
     axios
       .get("http://localhost:8000/cash_flow/registro/user/" + idUser.id,{
         headers: { 
