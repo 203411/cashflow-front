@@ -5,14 +5,13 @@ import StyleLogin from '../UsuarioRegistro/Login.module.css';
 import './Register.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faBan} from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 
 export default function Register() {
 
   const token = localStorage.getItem('tokenLocal');
-  var clickEdit = faEdit;
 
   const [idRegistro, setIdRegistro]= useState('');
   const [username, setUsername]= useState('');
@@ -27,7 +26,7 @@ export default function Register() {
   const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = (el) => {setShow(true); console.log(el); setIdRegistro(el.id)};
+    const handleShow = (el) => {setShow(true); setIdRegistro(el.id)};
 
   const get_registros = () => {
     axios
@@ -37,11 +36,11 @@ export default function Register() {
         }
     })
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setListRegistro(response.data)
       })
       .catch((error) => {
-        console.log(error.response.data)
+        // console.log(error.response.data)
       })
   }
 
@@ -73,7 +72,7 @@ export default function Register() {
     for (let index = 0; index < listRegistro.length; index++) {
       const element = listRegistro[index];
       if(idRegistro === element.id){
-        console.log("usuario put")
+        // console.log("usuario put")
         usuarioNuevo = false
         peticionPut(element)
         index = listRegistro.length;
@@ -89,7 +88,7 @@ export default function Register() {
         is_superuser: isGerente
       }
 
-      console.log(postData)
+      // console.log(postData)
 
       axios
         .post("http://localhost:8000/cash_flow/registro/lista/", postData, {
@@ -99,7 +98,7 @@ export default function Register() {
           }
         })
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           setUsername("");
           setEmail("");
           setPassword("");
@@ -109,14 +108,14 @@ export default function Register() {
           get_registros()
         })
         .catch((error) => {
-          console.log(error.response.data)
+          // console.log(error.response.data)
           alert("usuario no registrado!");
         })
     }
   }
 
   const peticionDelete = (user) =>{
-    console.log(user.idRegistro)
+    // console.log(user.idRegistro)
     axios
       .delete("http://localhost:8000/cash_flow/registro/user/" + user.idRegistro,{
         headers: { 
@@ -131,7 +130,7 @@ export default function Register() {
   }
 
   const peticionPut = (element) =>{
-    console.log(element.id)
+    // console.log(element.id)}
     var putData = {
       username: username,
       password: password,
@@ -147,7 +146,7 @@ export default function Register() {
         }
       })
       .then((response)=>{
-        console.log(response.data)
+        // console.log(response.data)
         setIdRegistro("");
         setUsername("");
         setEmail("");
@@ -169,7 +168,7 @@ export default function Register() {
         }
       })
       .then((response)=>{
-        console.log(response.data)
+        // console.log(response.data)
         setIdRegistro(response.data.id)
         document.getElementById("username").value = response.data.username
         document.getElementById("email").value = response.data.email

@@ -30,10 +30,10 @@ export default function Categorias() {
                     'Authorization': 'Token ' + token,
                 }
             }).then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 setListCategorias(response.data)
             }).catch((error) => {
-                console.log(error.data)
+                // console.log(error.data)
             })
     }
 
@@ -70,7 +70,7 @@ export default function Categorias() {
                     document.getElementById("categoria").value = "";
                     document.getElementById("sub_categoria").value = "";
                 }).catch((error) => {
-                    console.log(error.response.data)
+                    // console.log(error.response.data)
                 })
         }
         // console.log(postData);
@@ -84,7 +84,7 @@ export default function Categorias() {
                 }
             })
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 setIdCategoria(response.data.id)
                 document.getElementById("modalCategoria").value = response.data.descripcion
                 document.getElementById("modalSubCategoria").value = response.data.sub_categoria
@@ -93,7 +93,7 @@ export default function Categorias() {
                 setSubCategoria(response.data.sub_categoria)
             })
             .catch((error) => {
-                console.log(error.response.data)
+                // console.log(error.response.data)
             })
     }
 
@@ -121,10 +121,10 @@ export default function Categorias() {
                 })
                 .then((response) => {
                     get_categorias()
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
                 .catch((error) => {
-                    console.log(error.response.data)
+                    // console.log(error.response.data)
                 })
             handleClose()
         }
