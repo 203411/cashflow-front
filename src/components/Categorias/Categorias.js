@@ -55,6 +55,8 @@ export default function Categorias() {
                 sub_categoria: subCategoria,
             }
 
+            // console.log(postData)
+
             axios
                 .post("http://localhost:8000/cash_flow/categorias/options", postData, {
                     headers: {
@@ -62,11 +64,17 @@ export default function Categorias() {
                         'Authorization': 'Token ' + token,
                     }
                 }).then((response) => {
+                    console.log(response)
                     get_categorias()
-                    document.getElementById("categoria").value = "";
+                    document.getElementById("categoria").value = "Seleccione una categoria";
                     document.getElementById("sub_categoria").value = "";
+                    setIdCategoria(-1);
+                    setCategoria("");
+                    setSubCategoria("");
                 }).catch((error) => {
-                    // console.log(error.response.data)
+                    if(error.response != null){
+                        console.log(error.response.data)
+                    }
                 })
         }
         // console.log(postData);
@@ -82,10 +90,10 @@ export default function Categorias() {
             .then((response) => {
                 // console.log(response.data)
                 setIdCategoria(response.data.id)
-                document.getElementById("modalCategoria").value = response.data.descripcion
-                document.getElementById("modalSubCategoria").value = response.data.sub_categoria
                 setCategoria(response.data.descripcion)
                 setSubCategoria(response.data.sub_categoria)
+                document.getElementById("modalSubcategoria").value = response.data.sub_categoria
+                document.getElementById("modalCategoria").value = response.data.descripcion
             })
             .catch((error) => {
                 // console.log(error.response.data)
@@ -112,6 +120,9 @@ export default function Categorias() {
                     }
                 })
                 .then((response) => {
+                    setIdCategoria(-1);
+                    setCategoria("");
+                    setSubCategoria("");
                     get_categorias()
                     // console.log(response.data)
                 })
@@ -124,14 +135,14 @@ export default function Categorias() {
 
     return (
         <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)' }}>
-            <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px' }}>
+            <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px', minWidth: '50%'}}>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Gestion de Categorias</div>
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Categoria:</label>
-                    <select class="custom-select" onChange={(e) => setCategoria(e.target.value === 'Seleccione una categoria' ? null : e.target.value)} id="clasificacion">
-                        <option>Seleccione una categoria</option>
+                    <select class="custom-select" onChange={(e) => setCategoria(e.target.value === 'Seleccione una categoria' ? null : e.target.value)} id="categoria">
+                        <option selected>Seleccione una categoria</option>
                         {optionCategoria.length > 0 ?
                             (optionCategoria.map((value) =>
                                 <option value={value}>{value}</option>
@@ -168,7 +179,7 @@ export default function Categorias() {
                                         <td>{value.descripcion}</td> 
                                         <td>{value.sub_categoria}</td>
                                         <td>
-                                            <Button className="btn btn-primary btn-sm" onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button  >{"   "}
+                                            <Button className="btn btn-primary btn-sm" style={{width:"95%"}} onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button  >{"   "}
                                         </td>
                                     </tr>
                                 ))
@@ -201,7 +212,7 @@ export default function Categorias() {
                         <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                             <label>Sub-Categoria:</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" onChange={(e) => setSubCategoria(e.target.value)} placeholder="Sub-Categoria " aria-label="Amount (to the nearest dollar)" id="modalSubCategoria" />
+                                <input type="text" class="form-control" onChange={(e) => setSubCategoria(e.target.value)} placeholder="Sub-Categoria " aria-label="Amount (to the nearest dollar)" id="modalSubcategoria"></input>
                             </div>
                         </Form.Group>
 
