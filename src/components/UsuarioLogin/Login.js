@@ -2,7 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import StyleLogin from './Login.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faUnlock, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons'
 
 export default class Login extends Component{
 

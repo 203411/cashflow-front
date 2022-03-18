@@ -147,13 +147,7 @@ export default function Register() {
       })
       .then((response)=>{
         // console.log(response.data)
-        setIdRegistro("");
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setPassword2("");
-        setIsGerente(null);
-        setEmailValidate("")
+        limpiarForm();
         get_registros();
       })
 
