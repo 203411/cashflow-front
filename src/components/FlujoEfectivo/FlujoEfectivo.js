@@ -15,8 +15,14 @@ export default function FlujoEfectivo()  {
 
     const [listFlujos, setListFlujos] = useState([]);
     const [listCategorias, setListCategorias] = useState([]);
+    const [listC, setListC] = useState([]);
 
     const token = localStorage.getItem('tokenLocal');
+
+
+    const [categoriaEntrada, setCategoriaEntrada] = useState([]);
+    const [categoriaSalida, setCategoriaSalida] = useState([]);
+    const [categoriaSalida2, setCategoriaSalida2] = useState([]);
 
     const get_flujos = () => {
         axios.get("http://localhost:8000/cash_flow/flujo/efectivo",{
@@ -32,22 +38,46 @@ export default function FlujoEfectivo()  {
     }
 
     const get_categorias = () =>{
-        axios.get("http://localhost:8000/cash_flow/categorias/options",{
+        axios.get("http://localhost:8000/cash_flow/categorias/entrada",{
             headers:{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            setListCategorias(response.data);
+            setCategoriaEntrada(response.data);
         })
     }
+
+    const get_categorias_salida = () =>{
+        axios.get("http://localhost:8000/cash_flow/categorias/costo",{
+            headers:{
+                'Authorization': 'Token ' + token,
+            }
+        }).then((response)=>{
+            setCategoriaSalida(response.data);
+        })
+    }
+
+    const get_categorias_salida2 =() =>{
+        axios.get("http://localhost:8000/cash_flow/categorias/gasto",{
+            headers:{
+                'Authorization': 'Token ' + token,
+            }
+        }).then((response)=>{
+            for( let i =0; i < response.data.length ; i++){
+                setCategoriaSalida([...categoriaSalida,response.data[i]]);
+            }
+        })
+    }
+
 
     useEffect(()=>{
         get_flujos();
         get_categorias();
+        get_categorias_salida();
+        get_categorias_salida2();
     },[]);
 
     const agregar_flujos = () =>{
-
         const data = {
             id_categoria : categoria,
             descripcion : descripcion,
@@ -72,18 +102,32 @@ export default function FlujoEfectivo()  {
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <div style={{ textAlign: 'center', fontSize: 'x-large' }}>FlujoEfectivo</div>
                 </Form.Group>
+                                <Form.Group className="mb-3 p-2" controlId="formBasicPassword">
+                    <label>Tipo:</label>
+                    <div className="input-group mb-3">
+                        <select className="custom-select" onChange={(e)=>{
+                            setTipo(e.target.value);
+                            {tipo=== "Salida" ? setListC(categoriaEntrada) : setListC(categoriaSalida)}
+                            console.log(listC);
+                        }}>
+                            <option value={"Entrada"}>Entrada</option>
+                            <option value={"Salida"}>Salida</option>
+                        </select>
+                        
+                    </div>
+                </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Categoria:</label>
                     <select className="custom-select" onChange={(e)=> setCategoria(e.target.value)}>
-                        {listCategorias.length > 0 ?
-                            (listCategorias.map((el)=>(<SelectsCategorias
-                                key = {el.id}
-                                el = {el}
-                            />))
-                            ):(
-                                <option value={"0"}>No hay categorias registradas</option>
-                            )
-                        }
+                        {listC.length > 0 ?
+                                (listC.map((el)=>(<SelectsCategorias
+                                    key = {el.id}
+                                    el = {el}
+                                />))
+                                ):(
+                                    <option value={"0"}>No hay categorias registradas</option>
+                                )
+                            }
                     </select>
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
@@ -101,15 +145,7 @@ export default function FlujoEfectivo()  {
                         <input type="number" className="form-control" onChange={(e)=> setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" />
                     </div>
                 </Form.Group>
-                <Form.Group className="mb-3 p-2" controlId="formBasicPassword">
-                    <label>Tipo:</label>
-                    <div className="input-group mb-3">
-                        <select className="custom-select" onChange={(e)=> setTipo(e.target.value)}>
-                            <option value={"Entrada"}>Entrada</option>
-                            <option value={"Salida"}>Salida</option>
-                        </select>
-                    </div>
-                </Form.Group>
+
                 <div style={{ textAlign: 'Center' }} className='mb-3'>
                     <Button onClick={()=> agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md">Registrar</Button>
                 </div>

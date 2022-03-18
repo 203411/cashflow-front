@@ -9,7 +9,6 @@ export default function Categorias() {
     const token = localStorage.getItem('tokenLocal');
 
     const [idCategoria, setIdCategoria] = useState(-1);
-    const [clasificacion, setClasificacion] = useState('');
     const [categoria, setCategoria] = useState('');
     const [subCategoria, setSubCategoria] = useState('');
 
@@ -41,20 +40,17 @@ export default function Categorias() {
         get_categorias();
     }, []);
 
-    const optionClasificacion = ['Costo-Venta', 'Egreso']
+    const optionCategoria = ['INGRESO', 'COSTO-VENTA', 'GASTO-AOC']
 
     const agregar_categoria = () => {
-        if (clasificacion === null && categoria === "" && subCategoria === "") {
+        if (categoria === "" && subCategoria === "") {
             alert("Debes rellenar todos los campos")
-        } else if (clasificacion === null) {
-            alert("El campo clasificacion no puede estar vacio")
         } else if (categoria === "") {
             alert("El campo categoria no puede estar vacio")
         } else if (subCategoria === "") {
             alert("El campo sub-categoria no puede estar vacio")
         } else {
             var postData = {
-                clasificacion: clasificacion,
                 descripcion: categoria,
                 sub_categoria: subCategoria,
             }
@@ -88,7 +84,6 @@ export default function Categorias() {
                 setIdCategoria(response.data.id)
                 document.getElementById("modalCategoria").value = response.data.descripcion
                 document.getElementById("modalSubCategoria").value = response.data.sub_categoria
-                setClasificacion(response.data.clasificacion)
                 setCategoria(response.data.descripcion)
                 setSubCategoria(response.data.sub_categoria)
             })
@@ -98,17 +93,14 @@ export default function Categorias() {
     }
 
     const editar_categoria = (idCategoria) => {
-        if (clasificacion === null && categoria === "" && subCategoria === "") {
+        if (categoria === "" && subCategoria === "") {
             alert("Debes rellenar todos los campos")
-        } else if (clasificacion === null) {
-            alert("El campo clasificacion no puede estar vacio")
         } else if (categoria === "") {
             alert("El campo categoria no puede estar vacio")
         } else if (subCategoria === "") {
             alert("El campo sub-categoria no puede estar vacio")
         } else {
             var putData = {
-                clasificacion: clasificacion,
                 descripcion: categoria,
                 sub_categoria: subCategoria,
             }
@@ -137,23 +129,17 @@ export default function Categorias() {
                     <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Gestion de Categorias</div>
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Clasificacion:</label>
-                    <select class="custom-select" onChange={(e) => setClasificacion(e.target.value === 'Seleccione una clasificación' ? null : e.target.value)} id="clasificacion">
-                        <option>Seleccione una clasificación</option>
-                        {optionClasificacion.length > 0 ?
-                            (optionClasificacion.map((value) =>
+                    <label>Categoria:</label>
+                    <select class="custom-select" onChange={(e) => setCategoria(e.target.value === 'Seleccione una categoria' ? null : e.target.value)} id="clasificacion">
+                        <option>Seleccione una categoria</option>
+                        {optionCategoria.length > 0 ?
+                            (optionCategoria.map((value) =>
                                 <option value={value}>{value}</option>
                             )) : (
-                                <option value={"0"}>No hay clasificaciones registradas</option>
+                                <option value={"0"}>No hay categorias registradas</option>
                             )
                         }
                     </select>
-                </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Categoria:</label>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" onChange={(e) => setCategoria(e.target.value)} placeholder="Categoria " aria-label="Amount (to the nearest dollar)" id="categoria" />
-                    </div>
                 </Form.Group>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <label>Sub-Categoria:</label>
@@ -169,7 +155,6 @@ export default function Categorias() {
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th>Clasificacion</th>
                                 <th>Categoria</th>
                                 <th>Sub-Categoria</th>
                                 <th>Acciones</th>
@@ -180,8 +165,7 @@ export default function Categorias() {
                                 (listCategorias.map((value) => (
                                     <tr key={value.id}>
                                         {/* <td>{value.id}</td> */}
-                                        <td>{value.clasificacion}</td>
-                                        <td>{value.descripcion}</td> {/*muestra la categoria*/}
+                                        <td>{value.descripcion}</td> 
                                         <td>{value.sub_categoria}</td>
                                         <td>
                                             <Button className="btn btn-primary btn-sm" onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button  >{"   "}
@@ -207,18 +191,12 @@ export default function Categorias() {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                            <label>Clasificacion:</label>
-                            <select class="custom-select" onChange={(e) => setClasificacion(e.target.value)}>
-                                {optionClasificacion.length > 0 ?
-                                    (optionClasificacion.map((value) => (value === clasificacion ? <option value={clasificacion} selected>{clasificacion}</option> : <option value={value}>{value}</option>))) : (<option value={"0"}>No hay clasificaciones registradas</option>)
+                            <label>Categoria:</label>
+                            <select class="custom-select" onChange={(e) => setCategoria(e.target.value)}>
+                                {optionCategoria.length > 0 ?
+                                    (optionCategoria.map((value) => (value === categoria ? <option value={categoria} selected>{categoria}</option> : <option value={value}>{value}</option>))) : (<option value={"0"}>No hay categorias registradas</option>)
                                 }
                             </select>
-                        </Form.Group>
-                        <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                            <label>Categoria:</label>
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" onChange={(e) => setCategoria(e.target.value)} placeholder="Categoria " aria-label="Amount (to the nearest dollar)" id="modalCategoria" />
-                            </div>
                         </Form.Group>
                         <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                             <label>Sub-Categoria:</label>
