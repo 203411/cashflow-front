@@ -99,13 +99,8 @@ export default function Register() {
         })
         .then((response) => {
           // console.log(response.data)
-          setUsername("");
-          setEmail("");
-          setPassword("");
-          setPassword2("");
-          setIsGerente(null);
-          setEmailValidate("")
-          get_registros()
+          limpiarForm();
+          get_registros();
         })
         .catch((error) => {
           // console.log(error.response.data)
