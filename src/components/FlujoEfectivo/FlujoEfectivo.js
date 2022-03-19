@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Dropdown, Table, Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import SelectsCategorias from "./SelectsCategorias";
 import Fila from './Fila';
@@ -37,7 +37,7 @@ export default function FlujoEfectivo()  {
         })
     }
 
-    const get_categorias = () =>{
+    const getCategoriasEntrada = () =>{ //trae categorias de INGRESO
         axios.get("http://localhost:8000/cash_flow/categorias/entrada",{
             headers:{
                 'Authorization': 'Token ' + token,
@@ -63,7 +63,7 @@ export default function FlujoEfectivo()  {
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            for( let i =0; i < response.data.length ; i++){
+            for( let i=0; i < response.data.length ; i++){
                 setCategoriaSalida([...categoriaSalida,response.data[i]]);
             }
         })
@@ -72,7 +72,7 @@ export default function FlujoEfectivo()  {
 
     useEffect(()=>{
         get_flujos();
-        get_categorias();
+        getCategoriasEntrada();
         get_categorias_salida();
         get_categorias_salida2();
     },[]);
@@ -105,11 +105,7 @@ export default function FlujoEfectivo()  {
                                 <Form.Group className="mb-3 p-2" controlId="formBasicPassword">
                     <label>Tipo:</label>
                     <div className="input-group mb-3">
-                        <select className="custom-select" onChange={(e)=>{
-                            setTipo(e.target.value);
-                            {tipo=== "Salida" ? setListC(categoriaEntrada) : setListC(categoriaSalida)}
-                            console.log(listC);
-                        }}>
+                        <select className="custom-select" onChange={(e)=>{setTipo(e.target.value); {e.target.value === "Entrada" ? setListC(categoriaEntrada) : setListC(categoriaSalida)}}}>
                             <option value={"Entrada"}>Entrada</option>
                             <option value={"Salida"}>Salida</option>
                         </select>

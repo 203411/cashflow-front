@@ -1,0 +1,28 @@
+.tableFixed tbody{
+    height: 43vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.tableFixed tbody::-webkit-scrollbar {
+    width: 2vh;
+}
+
+.tableFixed tbody::-webkit-scrollbar-thumb{
+    background: #0b0b13e6;
+    height: 10vh;
+    border-radius: 10px;
+}
+
+.tableFixed thead,
+.tableFixed tbody,
+.tableFixed td,
+.tableFixed th{
+    display: block;
+}
+
+.tableFixed tbody td,
+.tableFixed thead > tr > th{
+    float: left;
+    border-bottom-width: 0px;
+}

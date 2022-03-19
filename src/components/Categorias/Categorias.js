@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import CategoriaCss from './Categorias.module.css';
 import React, { useEffect, useState } from 'react'
 import { Form, Table, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -162,13 +163,13 @@ export default function Categorias() {
                     <Button onClick={() => agregar_categoria()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md" block>Guardar</Button>
                 </div>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Table striped bordered hover variant="dark">
+                    <Table striped bordered hover variant="dark" className={CategoriaCss.tableFixed}>
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th>Categoria</th>
-                                <th>Sub-Categoria</th>
-                                <th>Acciones</th>
+                                <th style={{width: "30vh"}}>Categoria</th>
+                                <th style={{width: "45vh"}}>Sub-Categoria</th>
+                                <th style={{width: "20vh"}}>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -176,10 +177,10 @@ export default function Categorias() {
                                 (listCategorias.map((value) => (
                                     <tr key={value.id}>
                                         {/* <td>{value.id}</td> */}
-                                        <td>{value.descripcion}</td> 
-                                        <td>{value.sub_categoria}</td>
-                                        <td>
-                                            <Button className="btn btn-primary btn-sm" style={{width:"95%"}} onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button  >{"   "}
+                                        <td style={{width: "30vh", height : "10vh"}}>{value.descripcion}</td> 
+                                        <td style={{width: "45vh", height : "10vh"}}>{value.sub_categoria}</td>
+                                        <td style={{width: "18vh"}}>
+                                            <Button className="btn btn-primary btn-sm" style={{width:"95%"}} onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit}/></Button>
                                         </td>
                                     </tr>
                                 ))
