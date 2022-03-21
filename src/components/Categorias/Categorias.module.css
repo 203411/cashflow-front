@@ -26,3 +26,18 @@
     float: left;
     border-bottom-width: 0px;
 }
+
+.divButton{
+    position: absolute;
+    left: 0;
+}
+
+.divButton .buttonHome{
+    padding: 15px 40px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    background: #dadada;
+    cursor: pointer;
+    margin: 20px 20px 0 20px;
+}

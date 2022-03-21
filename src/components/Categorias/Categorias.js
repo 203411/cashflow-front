@@ -224,10 +224,10 @@ export default function Categorias() {
                     <Button className="btn btn-primary" style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} onClick={() => editar_categoria({ idCategoria })}>Guardar</Button>
                 </Modal.Footer>
             </Modal>
-            <div style={{position: "absolute", left: "0" }}>
-                <Link to="/home"><button style={{padding: "15px 40px", fontSize : "16px",borderRadius: "30px",border: "none",background: "#dadada",cursor: "pointer",margin: "0 20px 0 20px"}}>
-                    Home
-                </button></Link>
+            <div className={CategoriaCss.divButton}>
+                <Link to="/home">
+                    <button className={CategoriaCss.buttonHome}>Home</button>
+                </Link>
             </div>
         </div>
     );

@@ -23,13 +23,13 @@ const Fila = ({el, token}) =>{
     
     return(
         <tr>
-            <td>{id}</td>
-            <td>{fecha}</td>
-            <td>{tipo}</td>
-            <td>{descripcion}</td>
-            <td>${cantidad}</td>
-            <td>{categoria.descripcion}</td>
-            <td>{categoria.sub_categoria}</td>
+            {/* <td>{id}</td> */}
+            <td style={{width: "14vh"}}>{fecha}</td>
+            <td style={{width: "11vh"}}>{tipo}</td>
+            <td style={{width: "30vh"}}>{descripcion}</td>
+            <td style={{width: "16vh"}}>${cantidad}</td>
+            <td style={{width: "20vh", textAlign : "center"}}>{categoria.descripcion}</td>
+            <td style={{width: "28vh"}}>{categoria.sub_categoria}</td>
         </tr>
     )
 }

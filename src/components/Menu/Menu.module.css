@@ -1,3 +1,6 @@
+body{
+    overflow: hidden;
+}
 
 .body{
     background: linear-gradient(148.34deg, #3737DE 0%, #0b0b13e6 91.51%);

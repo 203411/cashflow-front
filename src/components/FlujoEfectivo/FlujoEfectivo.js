@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
+import CategoriaCss from '../Categorias/Categorias.module.css';
 import { Form } from 'react-bootstrap';
 import SelectsCategorias from "./SelectsCategorias";
 import Fila from './Fila';
@@ -14,7 +15,7 @@ export default function FlujoEfectivo()  {
     const [tipo, setTipo] = useState('');
 
     const [listFlujos, setListFlujos] = useState([]);
-    const [listCategorias, setListCategorias] = useState([]);
+    // const [listCategorias, setListCategorias] = useState([]);
     const [listC, setListC] = useState([]);
 
     const token = localStorage.getItem('tokenLocal');
@@ -22,7 +23,6 @@ export default function FlujoEfectivo()  {
 
     const [categoriaEntrada, setCategoriaEntrada] = useState([]);
     const [categoriaSalida, setCategoriaSalida] = useState([]);
-    const [categoriaSalida2, setCategoriaSalida2] = useState([]);
 
     const get_flujos = () => {
         axios.get("http://localhost:8000/cash_flow/flujo/efectivo",{
@@ -47,8 +47,8 @@ export default function FlujoEfectivo()  {
         })
     }
 
-    const get_categorias_salida = () =>{
-        axios.get("http://localhost:8000/cash_flow/categorias/costo",{
+    const getCategoriasSalida = () =>{ //trae categorias COSTO-VENTA y GASTOS-AOC
+        axios.get("http://localhost:8000/cash_flow/categorias/salida",{
             headers:{
                 'Authorization': 'Token ' + token,
             }
@@ -57,27 +57,14 @@ export default function FlujoEfectivo()  {
         })
     }
 
-    const get_categorias_salida2 =() =>{
-        axios.get("http://localhost:8000/cash_flow/categorias/gasto",{
-            headers:{
-                'Authorization': 'Token ' + token,
-            }
-        }).then((response)=>{
-            for( let i=0; i < response.data.length ; i++){
-                setCategoriaSalida([...categoriaSalida,response.data[i]]);
-            }
-        })
-    }
-
-
     useEffect(()=>{
         get_flujos();
         getCategoriasEntrada();
-        get_categorias_salida();
-        get_categorias_salida2();
+        getCategoriasSalida();
     },[]);
 
     const agregar_flujos = () =>{
+
         const data = {
             id_categoria : categoria,
             descripcion : descripcion,
@@ -87,75 +74,83 @@ export default function FlujoEfectivo()  {
         
         axios.post("http://localhost:8000/cash_flow/flujo/efectivo",data,{
             headers :{
+                'Content-Type': 'application/json',
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
+            console.log(response.data)
             get_flujos();
         }).catch((error)=>{
+            console.log(error.response.data)
             alert("No se pudo agregar")
         })
     }
 
     return (
         <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)' }}>
-            <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px' }}>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <div style={{ textAlign: 'center', fontSize: 'x-large' }}>FlujoEfectivo</div>
+            <Form className='mt-1 pb-3' style={{ background: 'white', padding: '1%', borderRadius: '10px'}}>
+                <Form.Group className="mb-4 mt-2" controlId="formBasicPassword">
+                    <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Flujo Efectivo</div>
                 </Form.Group>
-                                <Form.Group className="mb-3 p-2" controlId="formBasicPassword">
-                    <label>Tipo:</label>
-                    <div className="input-group mb-3">
-                        <select className="custom-select" onChange={(e)=>{setTipo(e.target.value); {e.target.value === "Entrada" ? setListC(categoriaEntrada) : setListC(categoriaSalida)}}}>
-                            <option value={"Entrada"}>Entrada</option>
-                            <option value={"Salida"}>Salida</option>
-                        </select>
-                        
-                    </div>
-                </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Categoria:</label>
-                    <select className="custom-select" onChange={(e)=> setCategoria(e.target.value)}>
-                        {listC.length > 0 ?
-                                (listC.map((el)=>(<SelectsCategorias
-                                    key = {el.id}
-                                    el = {el}
-                                />))
-                                ):(
-                                    <option value={"0"}>No hay categorias registradas</option>
-                                )
-                            }
-                    </select>
-                </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Descripcion:</label>
-                    <div className="input-group" aria-label="Descripcion del flujo de efectivo a agregar">
-                        <textarea className="form-control" onChange={(e)=> setDescripcion(e.target.value)} aria-label="With textarea" placeholder="Descripcion acerca del flujo "></textarea>
-                    </div>
-                </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Cantidad:</label>
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text">$</span>
+                <Form.Group className="mb-2 p-2 row" controlId="formBasicPassword" style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
+                    <div className='col-sm-5'>
+                        <label>Tipo:</label>
+                        <div className="input-group mb-0">
+                            <select className="custom-select" onChange={(e)=>{setTipo(e.target.value === "" ? null : e.target.value); {e.target.value === "Entrada" ? setListC(categoriaEntrada) : (e.target.value === "Salida" ? setListC(categoriaSalida) : setListC([]))}}}>
+                                <option value={""}>Selecciona tipo movimiento</option>
+                                <option value={"Entrada"}>Entrada</option>
+                                <option value={"Salida"}>Salida</option>
+                            </select>
                         </div>
-                        <input type="number" className="form-control" onChange={(e)=> setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" />
+                    </div>
+                    <div className='col-sm-5'>
+                        <label>Categoria:</label>
+                        <div className="input-group mb-0">
+                            <select className="custom-select" onChange={(e)=> setCategoria(e.target.value)}>
+                                {listC.length > 0 ?
+                                        (listC.map((el)=>(<SelectsCategorias
+                                            key = {el.id}
+                                            el = {el}
+                                        />))
+                                        ):(
+                                            <option value={"0"}>No hay categorias registradas</option>
+                                        )
+                                    }
+                            </select>
+                        </div>
                     </div>
                 </Form.Group>
-
-                <div style={{ textAlign: 'Center' }} className='mb-3'>
-                    <Button onClick={()=> agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md">Registrar</Button>
-                </div>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Table striped bordered hover variant="dark">
+                <Form.Group controlId="formBasicPassword" style={{display:"flex", justifyContent: "center", alignItems: "center",width : "100%"}}>
+                    <div style={{width : "82%"}}>
+                        <label>Descripcion:</label>
+                        <div className="input-group" aria-label="Descripcion del flujo de efectivo a agregar">
+                            <textarea className="form-control" onChange={(e)=> setDescripcion(e.target.value)} aria-label="With textarea" placeholder="Descripcion acerca del flujo "></textarea>
+                        </div>
+                    </div>
+                </Form.Group>
+                <Form.Group className="mb-2 mt-2 row" controlId="formBasicPassword" style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
+                    <div className='col-sm-5'>
+                        <label>Cantidad:</label>
+                        <div className="input-group">
+                            <span className="input-group-text">$</span>
+                            <input type="number" className="form-control" onChange={(e)=> setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" min={"1"} max={"9999999.99"} step={"0.01"}/>
+                        </div>
+                    </div>
+                    <div style={{ textAlign: 'Center' }} className='col-sm-5'>
+                        <Button onClick={()=> agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg">Registrar</Button>
+                    </div>
+                </Form.Group>
+                <Form.Group className="mb-0" controlId="formBasicPassword">
+                    <Table striped bordered hover variant="dark" className={CategoriaCss.tableFixed}>
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Fecha</th>
-                                <th>Tipo</th>
-                                <th>Descripcion</th>
-                                <th>Cantidad</th>
-                                <th>Categoria</th>
-                                <th>Sub-Categoria</th>
+                                {/* <th>#</th> */}
+                                <th style={{width: "14vh", textAlign : "center"}}>Fecha</th>
+                                <th style={{width: "11vh", textAlign : "center"}}>Tipo</th>
+                                <th style={{width: "30vh", textAlign : "center"}}>Descripcion</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Cantidad</th>
+                                <th style={{width: "20vh", textAlign : "center"}}>Categoria</th>
+                                <th style={{width: "30vh", textAlign : "center"}}>Sub-Categoria</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -177,10 +172,10 @@ export default function FlujoEfectivo()  {
                     </Table>
                 </Form.Group>
             </Form>
-            <div style={{position: "absolute", left: "0" }}>
-                <Link to="/home"><button style={{padding: "15px 40px", fontSize : "16px",borderRadius: "30px",border: "none",background: "#dadada",cursor: "pointer",margin: "0 20px 0 20px"}}>
-                    Home
-                </button></Link>
+            <div className={CategoriaCss.divButton}>
+                <Link to="/home">
+                    <button className={CategoriaCss.buttonHome}>Home</button>
+                </Link>
             </div>
         </div>
     );
