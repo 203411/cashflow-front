@@ -34,7 +34,7 @@ class Manager extends Component{
             <div>
                 <div className={MenuCss.containerOptions}>
                     <Link to="/indicadores"><button>Indicadores Financieros</button></Link>
-                    <button>Generar reporte</button>
+                    <Link to="/reportes"><button>Generar reporte</button></Link>
                 </div>
                 <Link className={MenuCss.link} to="/registro" id={MenuCss.register}>Registro</Link>
             </div>

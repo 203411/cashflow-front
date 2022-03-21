@@ -6,6 +6,7 @@ import Register from './components/UsuarioRegistro/Register';
 import FlujoEfectivo from './components/FlujoEfectivo/FlujoEfectivo';
 import Categorias from './components/Categorias/Categorias';
 import Indicadores from './components/IndicadoresDinero/Indicadores';
+import ReporteIndicadores from './components/VistaReporte/ReporteIndicadores';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/flujo' element={<FlujoEfectivo />} />
                 <Route path='/categorias' element={<Categorias />} />
                 <Route path='/indicadores' element={<Indicadores />} />
+                <Route path='/reportes' element={<ReporteIndicadores />} />
             </Routes>
         </BrowserRouter>
     );
