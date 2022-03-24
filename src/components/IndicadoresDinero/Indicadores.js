@@ -33,8 +33,27 @@ export default function Indicadores() {
 
     useEffect(() => {
         get_indicadores();
+        get_fecha();
     }, []);
 
+    const get_fecha = () =>{
+        let semana;
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
+        const dia = hoy.toDateString().substring(8,10)
+        if (dia<8) {
+            semana = 1
+        }else if(dia>7 && dia<15){
+            semana = 2
+        }else if(dia>14 && dia<22){
+            semana = 3
+        }else if(dia>21 && dia<28){
+            semana = 4
+        }else if(dia>27){
+            semana = 5
+        }
+        document.getElementById("semana").value = semana
+    }
     const agregar_indicadores = () => {
         const data = {
             num_semana : num_semana,
@@ -70,7 +89,7 @@ export default function Indicadores() {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"></span>
                             </div>
-                            <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " max={4} min={1} aria-label="Amount (to the nearest dollar)" />
+                            <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " max={5} min={1} aria-label="Amount (to the nearest dollar)" id="semana" disabled/>
                         </div>
                     </div>
                     <div className='col-sm-5'>
@@ -115,8 +134,8 @@ export default function Indicadores() {
                                 <th style={{width: "14vh", textAlign : "center"}}>Fecha</th>
                                 <th style={{width: "14vh", textAlign : "center"}}>#Semana</th>
                                 <th style={{width: "30vh", textAlign : "center"}}>Tipo</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Descripcion</th>
-                                <th style={{width: "22vh", textAlign : "center"}}>Monto</th>
+                                <th style={{width: "35vh", textAlign : "center"}}>Descripcion</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Monto</th>
 
                             </tr>
                         </thead>
@@ -128,8 +147,8 @@ export default function Indicadores() {
                                         <td style={{width: "14vh", textAlign : "center"}}>{value.fecha}</td> 
                                         <td style={{width: "14vh", textAlign : "center"}}>{value.num_semana}</td>
                                         <td style={{width: "30vh", textAlign : "center"}}>{value.tipo}</td>
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.razon_social}</td>
-                                        <td style={{width: "20vh", textAlign : "center"}}>{value.monto}</td>
+                                        <td style={{width: "35vh", textAlign : "center"}}>{value.razon_social}</td>
+                                        <td style={{width: "14vh", textAlign : "center"}}>{value.monto}</td>
                                     </tr>
                                 ))
                                 ) : (

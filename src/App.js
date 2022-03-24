@@ -9,7 +9,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import MenuIndicadores from './components/VistaReporte/MenuReportes';
+import MenuReportes from './components/VistaReporte/MenuReportes';
 
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
                 <Route path='/registro' element={<Register />} />
                 <Route path='/flujo' element={<FlujoEfectivo />} />
                 <Route path='/categorias' element={<Categorias />} />
-                <Route path='/indicadores' element={<Indicadores />} />
-                <Route path='/reportes' element={<MenuIndicadores />} />
+                <Route path='/indicadores' element={<Indicadores/>} />
+                <Route path='/reportes' element={<MenuReportes />} />
             </Routes>
         </BrowserRouter>
     );

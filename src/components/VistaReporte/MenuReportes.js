@@ -20,8 +20,9 @@ export default function MenuIndicadores(){
 
     return(
         <div>
-            <div>
-                <div>
+            <div style={{display: "flex"}}>
+                <div style={{margin: "2vh 2vh"}}>
+                    <label>Reporte de:</label>
                     <select  onChange={(e)=> setMes(e.target.value)}>
                         <option>Elija un mes</option>
                         {meses.length > 0 ?
@@ -32,11 +33,13 @@ export default function MenuIndicadores(){
                             )
                         }
                     </select>
-                    <Button onClick={()=>{console.log(mes)}}>Generar reporte</Button>
+                    {/* <Button onClick={()=>{console.log(mes)}}>Generar reporte</Button> */}
+                </div>
+                <div>
+                    <Button onClick={handlePrint}>Imprimir</Button>
                 </div>
             </div>
-            <ReporteIndicadores ref={componentRef}/>
-            <Button onClick={handlePrint}>Imprimir</Button>
+            <ReporteIndicadores ref={componentRef} mesUser={mes}/>
         </div>
     )
 }
