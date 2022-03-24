@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useState, useRef} from 'react'
 import axios from 'axios';
 import { Dropdown, Table, Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default function ReporteIndicadores(){
+export const ReporteIndicadores = React.forwardRef((props,ref) =>{
 
     const token = localStorage.getItem("tokenLocal");
     const [cobrar, setCobrar] = useState([]);
@@ -49,7 +49,7 @@ export default function ReporteIndicadores(){
     }
 
     return(
-        <div>
+        <div ref={ref}>
             <Form>
             <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Table striped bordered hover variant="dark">
@@ -154,4 +154,6 @@ export default function ReporteIndicadores(){
             </Form>
         </div>
     );
-}
+})
+
+    
