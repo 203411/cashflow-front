@@ -1,8 +1,9 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import axios from 'axios';
-import { Dropdown, Table, Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import {  Table, Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import CategoriaCss from '../Categorias/Categorias.module.css'
 
 export default function Indicadores() {
 
@@ -49,6 +50,9 @@ export default function Indicadores() {
         }).then((response) => {
             get_indicadores()
         }).catch((error) => {
+            if(error.response.data != null){
+                console.log(error.response.data.num_semana);
+            }
             alert("No se pudo agregar")
         })
     }
@@ -57,59 +61,62 @@ export default function Indicadores() {
         <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)' }}>
             <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px' }}>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <div style={{ textAlign: 'center', fontSize: 'x-large' }}>FlujoEfectivo</div>
+                    <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Indicadores de dinero</div>
                 </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Numero de semana:</label>
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"></span>
+                <Form.Group className="mb-4 mt-4 row" controlId="formBasicPassword">
+                    <div className='col-sm-6'>
+                        <label>Numero de semana:</label>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"></span>
+                            </div>
+                            <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " max={4} min={1} aria-label="Amount (to the nearest dollar)" />
                         </div>
-                        <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " aria-label="Amount (to the nearest dollar)" />
+                    </div>
+                    <div className='col-sm-5'>
+                        <label>Tipo de Indicador:</label>
+                        <select class="custom-select" onChange={(e) => setTipo(e.target.value === 'Seleccione una opcion' ? null : e.target.value)} id="tipo">
+                            <option selected>Seleccione una opcion</option>
+                            {optionIndicador.length > 0 ?
+                                (optionIndicador.map((value) =>
+                                    <option value={value}>{value}</option>
+                                )) : (
+                                    <option value={"0"}>No hay opciones registradas</option>
+                                )
+                            }
+                        </select>
                     </div>
                 </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Tipo de Indicador:</label>
-                    <select class="custom-select" onChange={(e) => setTipo(e.target.value === 'Seleccione una opcion' ? null : e.target.value)} id="tipo">
-                        <option selected>Seleccione una opcion</option>
-                        {optionIndicador.length > 0 ?
-                            (optionIndicador.map((value) =>
-                                <option value={value}>{value}</option>
-                            )) : (
-                                <option value={"0"}>No hay opciones registradas</option>
-                            )
-                        }
-                    </select>
-                </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
+                <Form.Group className="mb-2 mt-2" controlId="formBasicPassword">
                     <label>Razon Social:</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" onChange={(e) => setRazonSocial(e.target.value)} placeholder="Razon social o descripcion del movimiento " aria-label="Amount (to the nearest dollar)" id="razon_social" />
                     </div>
                 </Form.Group>
-                <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
-                    <label>Monto:</label>
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text">$</span>
+                <Form.Group className="mb-2 mt-2" controlId="formBasicPassword" style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
+                    <div className='col-sm-5'>
+                        <label>Monto:</label>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text">$</span>
+                            </div>
+                            <input type="number" className="form-control" onChange={(e) => setMonto(e.target.value)} placeholder="Monto " aria-label="Amount (to the nearest dollar)" />
                         </div>
-                        <input type="number" className="form-control" onChange={(e) => setMonto(e.target.value)} placeholder="Monto " aria-label="Amount (to the nearest dollar)" />
+                    </div>
+                    <div className='col-sm-5' style={{ textAlign: 'Center' }}>
+                        <Button onClick={() => agregar_indicadores()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg">Registrar</Button>
                     </div>
                 </Form.Group>
-
-                <div style={{ textAlign: 'Center' }} className='mb-3'>
-                    <Button onClick={() => agregar_indicadores()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="md">Registrar</Button>
-                </div>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Table striped bordered hover variant="dark">
+                    <Table striped bordered hover variant="dark" className={CategoriaCss.tableFixed}>
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th>Fecha</th>
-                                <th>#Semana</th>
-                                <th>Tipo</th>
-                                <th>Descripcion</th>
-                                <th>Monto</th>
+                                <th style={{width: "14vh", textAlign : "center"}}>Fecha</th>
+                                <th style={{width: "14vh", textAlign : "center"}}>#Semana</th>
+                                <th style={{width: "30vh", textAlign : "center"}}>Tipo</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Descripcion</th>
+                                <th style={{width: "22vh", textAlign : "center"}}>Monto</th>
 
                             </tr>
                         </thead>
@@ -118,11 +125,11 @@ export default function Indicadores() {
                                 (listIndicadores.map((value) => (
                                     <tr key={value.id}>
                                         {/* <td>{value.id}</td> */}
-                                        <td>{value.fecha}</td> 
-                                        <td>{value.num_semana}</td>
-                                        <td>{value.tipo}</td>
-                                        <td>{value.razon_social}</td>
-                                        <td>{value.monto}</td>
+                                        <td style={{width: "14vh", textAlign : "center"}}>{value.fecha}</td> 
+                                        <td style={{width: "14vh", textAlign : "center"}}>{value.num_semana}</td>
+                                        <td style={{width: "30vh", textAlign : "center"}}>{value.tipo}</td>
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.razon_social}</td>
+                                        <td style={{width: "20vh", textAlign : "center"}}>{value.monto}</td>
                                     </tr>
                                 ))
                                 ) : (

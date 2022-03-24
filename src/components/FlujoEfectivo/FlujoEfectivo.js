@@ -79,6 +79,7 @@ export default function FlujoEfectivo()  {
             }
         }).then((response)=>{
             console.log(response.data)
+            alert("Guardado")
             get_flujos();
         }).catch((error)=>{
             console.log(error.response.data)
