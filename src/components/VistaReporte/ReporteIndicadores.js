@@ -11,6 +11,9 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
     const [bancos, setBancos] = useState([]);
     const [flujo, setFlujo] = useState([]);
     const [mes,setMes] = useState(0);
+    const [totalPagar, setTotalPagar] = useState([0,0,0,0,0,0]);
+    const [totalCobrar, setTotalCobrar] = useState([0,0,0,0,0,0]);
+    const [totalBancos, setTotalBancos] = useState([0,0,0,0,0,0]);
 
     useEffect(()=>{
         setMes(props.mesUser)
@@ -31,7 +34,17 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
+            console.log(response.data)
             setCobrar(response.data);
+            response.data.forEach(element => {
+                setTotalPagar(totalCobrar[0] += parseInt(element.semana1))
+                setTotalCobrar(totalCobrar[1] += parseInt(element.semana2))
+                setTotalCobrar(totalCobrar[2] += parseInt(element.semana3))
+                setTotalCobrar(totalCobrar[3] += parseInt(element.semana4))
+                setTotalCobrar(totalCobrar[4] += parseInt(element.semana5))
+            });
+            setTotalCobrar(totalCobrar[5] = totalCobrar[4])
+            console.log(totalCobrar)
         })
     }
 
@@ -41,7 +54,10 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            setPagar(response.data);
+            console.log(response.data[0].totales)
+            setPagar(response.data[0].pagar);
+            setTotalPagar(response.data[0].totales)
+            console.log(totalPagar)
         })
     }
 
@@ -52,6 +68,15 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
             }
         }).then((response)=>{
             setBancos(response.data);
+            response.data.forEach(element => {
+                setTotalBancos(totalBancos[0] += parseInt(element.semana1))
+                setTotalBancos(totalBancos[1] += parseInt(element.semana2))
+                setTotalBancos(totalBancos[2] += parseInt(element.semana3))
+                setTotalBancos(totalBancos[3] += parseInt(element.semana4))
+                setTotalBancos(totalBancos[4] += parseInt(element.semana5))
+            });
+            setTotalBancos(totalBancos[5] = totalBancos[4])
+            console.log(totalBancos)
         })
     }
 
@@ -78,6 +103,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 <th>Semana</th>
                                 <th>Semana</th>
                                 <th>Semana</th>
+                                <th>Semana</th>
                                 <th>Final</th>
                             </tr>
                         </thead>
@@ -86,6 +112,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (cobrar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
+                                        <td>{value.semana1}</td>
+                                        <td>{value.semana2}</td>
+                                        <td>{value.semana3}</td>
+                                        <td>{value.semana4}</td>
+                                        <td>{value.semana5}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -110,6 +141,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 <th>Semana</th>
                                 <th>Semana</th>
                                 <th>Semana</th>
+                                <th>Semana</th>
                                 <th>Final</th>
                             </tr>
                         </thead>
@@ -118,6 +150,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (pagar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
+                                        <td>{value.semana1}</td>
+                                        <td>{value.semana2}</td>
+                                        <td>{value.semana3}</td>
+                                        <td>{value.semana4}</td>
+                                        <td>{value.semana5}</td>
+                                        <td>{value.semana5}</td>    
                                     </tr>
                                 ))
                                 ) : (
@@ -129,7 +167,13 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 )
                             }
                             <tr>
-                                <td>Total Cuentas por cobrar</td>
+                                <td>Total Cuentas por pagar</td>
+                                <td>{totalPagar[0]}</td>
+                                <td>{totalPagar[1]}</td>
+                                <td>{totalPagar[2]}</td>
+                                <td>{totalPagar[3]}</td>
+                                <td>{totalPagar[4]}</td>
+                                <td>{totalPagar[5]}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -142,6 +186,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 <th>Semana</th>
                                 <th>Semana</th>
                                 <th>Semana</th>
+                                <th>Semana</th>
                                 <th>Final</th>
                             </tr>
                         </thead>
@@ -150,6 +195,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (bancos.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
+                                        <td>{value.semana1}</td>
+                                        <td>{value.semana2}</td>
+                                        <td>{value.semana3}</td>
+                                        <td>{value.semana4}</td>
+                                        <td>{value.semana5}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -161,7 +211,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 )
                             }
                             <tr>
-                                <td>Total Cuentas por cobrar</td>
+                                <td>Total Bancos</td>
                             </tr>
                         </tbody>
                     </Table>

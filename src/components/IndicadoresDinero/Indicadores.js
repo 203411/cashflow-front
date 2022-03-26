@@ -13,6 +13,7 @@ export default function Indicadores() {
     const [razon_social, setRazonSocial] = useState('');
     const [monto, setMonto] = useState('');
     const [tipo, setTipo] = useState('');
+    const [id, setId] = useState(0);
 
     const optionIndicador = ["Cuentas por pagar", "Cuentas por cobrar", "Banco"];
 
@@ -36,6 +37,10 @@ export default function Indicadores() {
         get_fecha();
     }, []);
 
+    useEffect(() => {
+        rellenarForm(id);
+    }, [id]);
+
     const get_fecha = () =>{
         let semana;
         const tiempoTranscurrido = Date.now();
@@ -52,27 +57,37 @@ export default function Indicadores() {
         }else if(dia>27){
             semana = 5
         }
+        setNumSemana(semana)
         document.getElementById("semana").value = semana
     }
     const agregar_indicadores = () => {
         const data = {
-            num_semana : num_semana,
             razon_social: razon_social,
             monto : monto,
             tipo : tipo
         }
 
-        axios.post("http://localhost:8000/cash_flow/indicadores/dinero", data, {
+        axios.post("http://localhost:8000/cash_flow/indicadores/dinero/"+num_semana, data, {
             headers: {
                 'Authorization': 'Token ' + token,
             }
         }).then((response) => {
             get_indicadores()
         }).catch((error) => {
-            if(error.response.data != null){
-                console.log(error.response.data.num_semana);
-            }
+            console.log(error.response)
             alert("No se pudo agregar")
+        })
+
+    }
+    const rellenarForm = (id) =>{
+        axios.get("http://localhost:8000/cash_flow/indicadores/dinero/"+id,{
+            headers: {
+                'Authorization': 'Token ' + token,
+            }
+        }).then((response) =>{
+            setTipo(response.data.tipo)
+            document.getElementById("razon_social").value = response.data.razon_social
+            setRazonSocial(response.data.razon_social)
         })
     }
 
@@ -98,7 +113,7 @@ export default function Indicadores() {
                             <option selected>Seleccione una opcion</option>
                             {optionIndicador.length > 0 ?
                                 (optionIndicador.map((value) =>
-                                    <option value={value}>{value}</option>
+                                    (value === tipo ? <option value={tipo} selected>{tipo}</option> : <option value={value}>{value}</option>)
                                 )) : (
                                     <option value={"0"}>No hay opciones registradas</option>
                                 )
@@ -131,24 +146,29 @@ export default function Indicadores() {
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{width: "14vh", textAlign : "center"}}>Fecha</th>
-                                <th style={{width: "14vh", textAlign : "center"}}>#Semana</th>
-                                <th style={{width: "30vh", textAlign : "center"}}>Tipo</th>
+                                <th style={{width: "21vh", textAlign : "center"}}>Tipo</th>
                                 <th style={{width: "35vh", textAlign : "center"}}>Descripcion</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Monto</th>
-
+                                <th style={{width: "6vh", textAlign : "center"}}>Mes</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Semana 1</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Semana 2</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Semana 3</th>
+                                <th style={{width: "16vh", textAlign : "center"}}>Semana 4</th>
+                                <th style={{width: "18vh", textAlign : "center"}}>Semana 5</th>
                             </tr>
                         </thead>
                         <tbody>
                             {listIndicadores.length > 0 ?
                                 (listIndicadores.map((value) => (
-                                    <tr key={value.id}>
+                                    <tr key={value.id}  onClick={() => setId(value.id)}>
                                         {/* <td>{value.id}</td> */}
-                                        <td style={{width: "14vh", textAlign : "center"}}>{value.fecha}</td> 
-                                        <td style={{width: "14vh", textAlign : "center"}}>{value.num_semana}</td>
-                                        <td style={{width: "30vh", textAlign : "center"}}>{value.tipo}</td>
+                                        <td style={{width: "21vh", textAlign : "center"}}>{value.tipo}</td>
                                         <td style={{width: "35vh", textAlign : "center"}}>{value.razon_social}</td>
-                                        <td style={{width: "14vh", textAlign : "center"}}>{value.monto}</td>
+                                        <td style={{width: "6vh", textAlign : "center"}}>{value.mes}</td> 
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana1}</td>
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana2}</td>
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana3}</td>
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana4}</td>
+                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana5}</td>
                                     </tr>
                                 ))
                                 ) : (
