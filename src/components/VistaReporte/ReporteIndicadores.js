@@ -225,11 +225,41 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Efectivo</td>
-                                        <td>{value.cantidadEntrada[0][0]}</td>
-                                        <td>{value.cantidadEntrada[0][1]}</td>
-                                        <td>{value.cantidadEntrada[0][2]}</td>
-                                        <td>{value.cantidadEntrada[0][3]}</td>
-                                        <td>{value.cantidadEntrada[0][4]}</td>
+                                        <td>
+                                            {value.cantidadEntrada[0][0]}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[0][1].toString().length > 6 ? 
+                                                "hola"
+                                                :value.cantidadEntrada[0][1])}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[0][2]/1000 > 1 ?
+                                                (value.cantidadEntrada[0][2]/10000 > 1 ?
+                                                    (value.cantidadEntrada[0][2]/100000>1?
+                                                        (value.cantidadEntrada[0][2]/100000)
+                                                        :parseInt(value.cantidadEntrada[0][2]/1000)+"," + parseFloat(value.cantidadEntrada[0][2]-parseInt(value.cantidadEntrada[0][2]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[0][2]/1000)+ "," + parseFloat(value.cantidadEntrada[0][2]-parseInt(value.cantidadEntrada[0][2]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[0][2]))}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[0][3]/1000 > 1 ?
+                                                (value.cantidadEntrada[0][3]/10000 > 1 ?
+                                                    (value.cantidadEntrada[0][3]/100000>1?
+                                                        (value.cantidadEntrada[0][3]/100000)
+                                                        :parseInt(value.cantidadEntrada[0][3]/1000)+"," + parseFloat(value.cantidadEntrada[0][3]-parseInt(value.cantidadEntrada[0][3]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[0][3]/1000)+ "," + parseFloat(value.cantidadEntrada[0][3]-parseInt(value.cantidadEntrada[0][3]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[0][3]))}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[0][4]/1000 > 1 ?
+                                                (value.cantidadEntrada[0][4]/10000 > 1 ?
+                                                    (value.cantidadEntrada[0][4]/100000>1?
+                                                        (value.cantidadEntrada[0][4]/100000)
+                                                        :parseInt(value.cantidadEntrada[0][4]/1000)+"," + parseFloat(value.cantidadEntrada[0][4]-parseInt(value.cantidadEntrada[0][4]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[0][4]/1000)+ "," + parseFloat(value.cantidadEntrada[0][4]-parseInt(value.cantidadEntrada[0][4]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[0][4]))}
+                                        </td>
                                     </tr>
                                 ))
                                 ) : (
@@ -244,11 +274,52 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Tarjeta de Crédito</td>
-                                        <td>{value.cantidadEntrada[1][0]}</td>
-                                        <td>{value.cantidadEntrada[1][1]}</td>
-                                        <td>{value.cantidadEntrada[1][2]}</td>
-                                        <td>{value.cantidadEntrada[1][3]}</td>
-                                        <td>{value.cantidadEntrada[1][4]}</td>
+                                        <td>
+                                            {(value.cantidadEntrada[1][0]/1000 > 1 ?
+                                                (value.cantidadEntrada[1][0]/10000 > 1 ?
+                                                    (value.cantidadEntrada[1][0]/100000>1?
+                                                        (value.cantidadEntrada[1][0]/100000)
+                                                        :parseInt(value.cantidadEntrada[1][0]/1000)+"," + parseFloat(value.cantidadEntrada[1][0]-parseInt(value.cantidadEntrada[1][0]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[1][0]/1000)+ "," + parseFloat(value.cantidadEntrada[1][0]-parseInt(value.cantidadEntrada[1][0]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[1][0]))}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[1][1]/1000 > 1 ?
+                                                (value.cantidadEntrada[1][1]/10000 > 1 ?
+                                                    (value.cantidadEntrada[1][1]/100000>1?
+                                                        (value.cantidadEntrada[1][1]/100000)
+                                                        :parseInt(value.cantidadEntrada[1][1]/1000)+","+ (parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2) > 100 ? parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2) : "0"+parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2)))
+                                                    :parseInt(value.cantidadEntrada[1][1]/1000)+","+ (parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2) > 100 ? parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2) : "0"+parseFloat(value.cantidadEntrada[1][1]-parseInt(value.cantidadEntrada[1][1]/1000)*1000).toFixed(2)))
+                                                :(value.cantidadEntrada[1][1]))}
+                                        </td>
+                                        {/* <td>{value.cantidadEntrada[1][1]}</td> */}
+                                        <td>
+                                            {(value.cantidadEntrada[1][2]/1000 > 1 ?
+                                                (value.cantidadEntrada[1][2]/10000 > 1 ?
+                                                    (value.cantidadEntrada[1][2]/100000>1?
+                                                        (value.cantidadEntrada[1][2]/100000)
+                                                        :parseInt(value.cantidadEntrada[1][2]/1000)+"," + parseFloat(value.cantidadEntrada[1][2]-parseInt(value.cantidadEntrada[1][2]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[1][2]/1000)+ "," + parseFloat(value.cantidadEntrada[1][2]-parseInt(value.cantidadEntrada[1][2]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[1][2]))}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[1][3]/1000 > 1 ?
+                                                (value.cantidadEntrada[1][3]/10000 > 1 ?
+                                                    (value.cantidadEntrada[1][3]/100000>1?
+                                                        (value.cantidadEntrada[1][3]/100000)
+                                                        :parseInt(value.cantidadEntrada[1][3]/1000)+"," + parseFloat(value.cantidadEntrada[1][3]-parseInt(value.cantidadEntrada[1][3]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[1][3]/1000)+ "," + parseFloat(value.cantidadEntrada[1][3]-parseInt(value.cantidadEntrada[1][3]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[1][3]))}
+                                        </td>
+                                        <td>
+                                            {(value.cantidadEntrada[1][4]/1000 > 1 ?
+                                                (value.cantidadEntrada[1][4]/10000 > 1 ?
+                                                    (value.cantidadEntrada[1][4]/100000>1?
+                                                        (value.cantidadEntrada[1][4]/100000)
+                                                        :parseInt(value.cantidadEntrada[1][4]/1000)+"," + parseFloat(value.cantidadEntrada[1][4]-parseInt(value.cantidadEntrada[1][4]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[1][4]/1000)+ "," + parseFloat(value.cantidadEntrada[1][4]-parseInt(value.cantidadEntrada[1][4]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[1][4]))}
+                                        </td>
                                     </tr>
                                 ))
                                 ) : (
@@ -263,8 +334,26 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Total Ingresos</td>
-                                        <td>{value.cantidadEntrada[2][0] === 1 ? 0 : value.cantidadEntrada[2][0]}</td>
-                                        <td>{value.cantidadEntrada[2][1] === 1 ? 0 : value.cantidadEntrada[2][1]}</td>
+                                        <td>
+                                            {value.cantidadEntrada[2][0] === 1 ? 0 
+                                            :(value.cantidadEntrada[2][0]/1000 > 1 ?
+                                                (value.cantidadEntrada[2][0]/10000 > 1 ?
+                                                    (value.cantidadEntrada[2][0]/100000>1?
+                                                        (value.cantidadEntrada[2][0]/100000)
+                                                        :parseInt(value.cantidadEntrada[2][0]/1000)+"," + parseFloat(value.cantidadEntrada[2][0]-parseInt(value.cantidadEntrada[2][0]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[2][0]/1000)+ "," + parseFloat(value.cantidadEntrada[2][0]-parseInt(value.cantidadEntrada[2][0]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[2][0]))}
+                                        </td>
+                                        <td>
+                                            {value.cantidadEntrada[2][1] === 1 ? 0 
+                                            :(value.cantidadEntrada[2][1]/1000 > 1 ?
+                                                (value.cantidadEntrada[2][1]/10000 > 1 ?
+                                                    (value.cantidadEntrada[2][1]/100000>1?
+                                                        (value.cantidadEntrada[2][1]/100000)
+                                                        :parseInt(value.cantidadEntrada[2][1]/1000)+"," + parseFloat(value.cantidadEntrada[2][1]-parseInt(value.cantidadEntrada[2][1]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadEntrada[2][1]/1000)+ "," + parseFloat(value.cantidadEntrada[2][1]-parseInt(value.cantidadEntrada[2][1]/1000)*1000).toFixed(2))
+                                                :(value.cantidadEntrada[2][1]))}
+                                        </td>
                                         <td>{value.cantidadEntrada[2][2] === 1 ? 0 : value.cantidadEntrada[2][2]}</td>
                                         <td>{value.cantidadEntrada[2][3] === 1 ? 0 : value.cantidadEntrada[2][3]}</td>
                                         <td>{value.cantidadEntrada[2][4] === 4 ? 0 : value.cantidadEntrada[2][4]}</td>
@@ -302,7 +391,15 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                         <td>Costos de Ventas</td>
                                         <td>{value.cantidadSalida[0][0]}</td>
                                         <td>{value.cantidadSalida[0][1]}</td>
-                                        <td>{value.cantidadSalida[0][2]}</td>
+                                        <td>
+                                            {(value.cantidadSalida[0][2]/1000 > 1 ?
+                                                (value.cantidadSalida[0][2]/10000 > 1 ?
+                                                    (value.cantidadSalida[0][2]/100000>1?
+                                                        (value.cantidadSalida[0][2]/100000)
+                                                        :parseInt(value.cantidadSalida[0][2]/1000)+"," + parseFloat(value.cantidadSalida[0][2]-parseInt(value.cantidadSalida[0][2]/1000)*1000).toFixed(2))
+                                                    :parseInt(value.cantidadSalida[0][2]/1000)+ "," + parseFloat(value.cantidadSalida[0][2]-parseInt(value.cantidadSalida[0][2]/1000)*1000).toFixed(2))
+                                                :(value.cantidadSalida[0][2]))}
+                                        </td>
                                         <td>{value.cantidadSalida[0][3]}</td>
                                         <td>{value.cantidadSalida[0][4]}</td>
                                     </tr>
