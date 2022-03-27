@@ -319,11 +319,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Gastos Fijos Operativos</td>
-                                        <td>{value.cantidadSalida[0][0]}</td>
-                                        <td>{value.cantidadSalida[0][1]}</td>
-                                        <td>{value.cantidadSalida[0][2]}</td>
-                                        <td>{value.cantidadSalida[0][3]}</td>
-                                        <td>{value.cantidadSalida[0][4]}</td>
+                                        <td>{value.cantidadSalida[1][0]}</td>
+                                        <td>{value.cantidadSalida[1][1]}</td>
+                                        <td>{value.cantidadSalida[1][2]}</td>
+                                        <td>{value.cantidadSalida[1][3]}</td>
+                                        <td>{value.cantidadSalida[1][4]}</td>
                                     </tr>
                                 ))
                                 ) : (
