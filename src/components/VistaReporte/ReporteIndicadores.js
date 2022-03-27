@@ -34,17 +34,8 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            console.log(response.data)
-            setCobrar(response.data);
-            response.data.forEach(element => {
-                setTotalPagar(totalCobrar[0] += parseInt(element.semana1))
-                setTotalCobrar(totalCobrar[1] += parseInt(element.semana2))
-                setTotalCobrar(totalCobrar[2] += parseInt(element.semana3))
-                setTotalCobrar(totalCobrar[3] += parseInt(element.semana4))
-                setTotalCobrar(totalCobrar[4] += parseInt(element.semana5))
-            });
-            setTotalCobrar(totalCobrar[5] = totalCobrar[4])
-            console.log(totalCobrar)
+            setCobrar(response.data[0].cobrar);
+            setTotalCobrar(response.data[0].totales)
         })
     }
 
@@ -54,10 +45,8 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            console.log(response.data[0].totales)
             setPagar(response.data[0].pagar);
             setTotalPagar(response.data[0].totales)
-            console.log(totalPagar)
         })
     }
 
@@ -67,16 +56,8 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            setBancos(response.data);
-            response.data.forEach(element => {
-                setTotalBancos(totalBancos[0] += parseInt(element.semana1))
-                setTotalBancos(totalBancos[1] += parseInt(element.semana2))
-                setTotalBancos(totalBancos[2] += parseInt(element.semana3))
-                setTotalBancos(totalBancos[3] += parseInt(element.semana4))
-                setTotalBancos(totalBancos[4] += parseInt(element.semana5))
-            });
-            setTotalBancos(totalBancos[5] = totalBancos[4])
-            console.log(totalBancos)
+            setBancos(response.data[0].bancos);
+            setTotalBancos(response.data[0].totales)
         })
     }
 
@@ -129,6 +110,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td>Total Cuentas por cobrar</td>
+                                <td>{totalCobrar[0]}</td>
+                                <td>{totalCobrar[1]}</td>
+                                <td>{totalCobrar[2]}</td>
+                                <td>{totalCobrar[3]}</td>
+                                <td>{totalCobrar[4]}</td>
+                                <td>{totalCobrar[5]}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -212,6 +199,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td>Total Bancos</td>
+                                <td>{totalBancos[0]}</td>
+                                <td>{totalBancos[1]}</td>
+                                <td>{totalBancos[2]}</td>
+                                <td>{totalBancos[3]}</td>
+                                <td>{totalBancos[4]}</td>
+                                <td>{totalBancos[5]}</td>
                             </tr>
                         </tbody>
                     </Table>
