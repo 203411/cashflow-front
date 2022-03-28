@@ -33,7 +33,6 @@ export default function MenuIndicadores(){
                             )
                         }
                     </select>
-                    {/* <Button onClick={()=>{console.log(mes)}}>Generar reporte</Button> */}
                 </div>
                 <div>
                     <Button onClick={handlePrint}>Imprimir</Button>

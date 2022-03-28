@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import axios from 'axios';
 import { Table} from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
+import ReporteCss from './Reporte.module.css'
 
 export const ReporteIndicadores = React.forwardRef((props,ref) =>{
 
@@ -79,7 +80,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{fontWeight : "bold"}}>Cuentas por cobrar</th>
+                                <th style={{fontWeight : "bold",fontSize : "25px"}}>Cuentas por cobrar</th>
                                 <th style={{fontWeight : "bold"}}>Semana 1</th>
                                 <th style={{fontWeight : "bold"}}>Semana 2</th>
                                 <th style={{fontWeight : "bold"}}>Semana 3</th>
@@ -93,7 +94,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (cobrar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{(value.semana1.toString().length > 6 ? 
+                                        <td>{(value.semana1.toString().length > 6 ?
                                                 (value.semana1.toString().length>7 ? 
                                                     (value.semana1.toString().length>8 ? 
                                                         value.semana1.toString().substring(0,3)+","+value.semana1.toString().substring(3)
@@ -214,7 +215,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}  
-                                <th  style={{fontWeight : "bold"}}>Cuentas por pagar</th>
+                                <th  style={{fontWeight : "bold",fontSize : "25px"}}>Cuentas por pagar</th>
                                 <th  style={{fontWeight : "bold"}}>Semana 1</th>
                                 <th  style={{fontWeight : "bold"}}>Semana 2</th>
                                 <th  style={{fontWeight : "bold"}}>Semana 3</th>
@@ -349,7 +350,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{fontWeight : "bold"}}>Bancos</th>
+                                <th style={{fontWeight : "bold",fontSize : "25px"}}>Bancos</th>
                                 <th style={{fontWeight : "bold"}}>Semana 1</th>
                                 <th style={{fontWeight : "bold"}}>Semana 2</th>
                                 <th style={{fontWeight : "bold"}}>Semana 3</th>
@@ -484,7 +485,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{fontWeight : "bold"}}>Ingresos</th>
+                                <th style={{fontWeight : "bold",fontSize : "25px"}}>Ingresos</th>
                                 <th style={{fontWeight : "bold"}}>Semana 1</th>
                                 <th style={{fontWeight : "bold"}}>Semana 2</th>
                                 <th style={{fontWeight : "bold"}}>Semana 3</th>
@@ -500,35 +501,45 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                         <td>
                                             {(value.cantidadEntrada[0][0].toString().length > 6 ? 
                                                 (value.cantidadEntrada[0][0].toString().length>7 ? 
-                                                value.cantidadEntrada[0][0].toString().substring(0,2)+","+value.cantidadEntrada[0][0].toString().substring(2)
+                                                    (value.cantidadEntrada[0][0].toString().length>8 ? 
+                                                        value.cantidadEntrada[0][0].toString().substring(0,3)+","+value.cantidadEntrada[0][0].toString().substring(3)
+                                                        :value.cantidadEntrada[0][0].toString().substring(0,2)+","+value.cantidadEntrada[0][0].toString().substring(2))
                                                     :value.cantidadEntrada[0][0].toString().substring(0,1)+","+value.cantidadEntrada[0][0].toString().substring(1))
                                                 :value.cantidadEntrada[0][0])}
                                         </td>
                                         <td>
                                             {(value.cantidadEntrada[0][1].toString().length > 6 ? 
                                                 (value.cantidadEntrada[0][1].toString().length>7 ? 
-                                                value.cantidadEntrada[0][1].toString().substring(0,2)+","+value.cantidadEntrada[0][1].toString().substring(2)
+                                                    (value.cantidadEntrada[0][1].toString().length>8 ? 
+                                                        value.cantidadEntrada[0][1].toString().substring(0,3)+","+value.cantidadEntrada[0][1].toString().substring(3)
+                                                        :value.cantidadEntrada[0][1].toString().substring(0,2)+","+value.cantidadEntrada[0][1].toString().substring(2))
                                                     :value.cantidadEntrada[0][1].toString().substring(0,1)+","+value.cantidadEntrada[0][1].toString().substring(1))
                                                 :value.cantidadEntrada[0][1])}
                                         </td>
                                         <td>
-                                            {(value.cantidadEntrada[0][2].toString().length > 6 ? 
+                                        {(value.cantidadEntrada[0][2].toString().length > 6 ? 
                                                 (value.cantidadEntrada[0][2].toString().length>7 ? 
-                                                value.cantidadEntrada[0][2].toString().substring(0,2)+","+value.cantidadEntrada[0][2].toString().substring(2)
+                                                    (value.cantidadEntrada[0][2].toString().length>8 ? 
+                                                        value.cantidadEntrada[0][2].toString().substring(0,3)+","+value.cantidadEntrada[0][2].toString().substring(3)
+                                                        :value.cantidadEntrada[0][2].toString().substring(0,2)+","+value.cantidadEntrada[0][2].toString().substring(2))
                                                     :value.cantidadEntrada[0][2].toString().substring(0,1)+","+value.cantidadEntrada[0][2].toString().substring(1))
                                                 :value.cantidadEntrada[0][2])}
                                         </td>
                                         <td>
                                             {(value.cantidadEntrada[0][3].toString().length > 6 ? 
                                                 (value.cantidadEntrada[0][3].toString().length>7 ? 
-                                                value.cantidadEntrada[0][3].toString().substring(0,2)+","+value.cantidadEntrada[0][3].toString().substring(2)
+                                                    (value.cantidadEntrada[0][3].toString().length>8 ? 
+                                                        value.cantidadEntrada[0][3].toString().substring(0,3)+","+value.cantidadEntrada[0][3].toString().substring(3)
+                                                        :value.cantidadEntrada[0][3].toString().substring(0,2)+","+value.cantidadEntrada[0][3].toString().substring(2))
                                                     :value.cantidadEntrada[0][3].toString().substring(0,1)+","+value.cantidadEntrada[0][3].toString().substring(1))
                                                 :value.cantidadEntrada[0][3])}
                                         </td>
                                         <td style={{fontWeight : "bold"}}>
                                             {(value.cantidadEntrada[0][4].toString().length > 6 ? 
                                                 (value.cantidadEntrada[0][4].toString().length>7 ? 
-                                                value.cantidadEntrada[0][4].toString().substring(0,2)+","+value.cantidadEntrada[0][4].toString().substring(2)
+                                                    (value.cantidadEntrada[0][4].toString().length>8 ? 
+                                                        value.cantidadEntrada[0][4].toString().substring(0,3)+","+value.cantidadEntrada[0][4].toString().substring(3)
+                                                        :value.cantidadEntrada[0][4].toString().substring(0,2)+","+value.cantidadEntrada[0][4].toString().substring(2))
                                                     :value.cantidadEntrada[0][4].toString().substring(0,1)+","+value.cantidadEntrada[0][4].toString().substring(1))
                                                 :value.cantidadEntrada[0][4])}
                                         </td>
@@ -549,35 +560,45 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                         <td>
                                             {(value.cantidadEntrada[1][0].toString().length > 6 ? 
                                                 (value.cantidadEntrada[1][0].toString().length>7 ? 
-                                                value.cantidadEntrada[1][0].toString().substring(0,2)+","+value.cantidadEntrada[1][0].toString().substring(2)
+                                                    (value.cantidadEntrada[1][0].toString().length>8 ? 
+                                                        value.cantidadEntrada[1][0].toString().substring(0,3)+","+value.cantidadEntrada[1][0].toString().substring(3)
+                                                        :value.cantidadEntrada[1][0].toString().substring(0,2)+","+value.cantidadEntrada[1][0].toString().substring(2))
                                                     :value.cantidadEntrada[1][0].toString().substring(0,1)+","+value.cantidadEntrada[1][0].toString().substring(1))
                                                 :value.cantidadEntrada[1][0])}
                                         </td>
                                         <td>
                                             {(value.cantidadEntrada[1][1].toString().length > 6 ? 
                                                 (value.cantidadEntrada[1][1].toString().length>7 ? 
-                                                value.cantidadEntrada[1][1].toString().substring(0,2)+","+value.cantidadEntrada[1][1].toString().substring(2)
+                                                    (value.cantidadEntrada[1][1].toString().length>8 ? 
+                                                        value.cantidadEntrada[1][1].toString().substring(0,3)+","+value.cantidadEntrada[1][1].toString().substring(3)
+                                                        :value.cantidadEntrada[1][1].toString().substring(0,2)+","+value.cantidadEntrada[1][1].toString().substring(2))
                                                     :value.cantidadEntrada[1][1].toString().substring(0,1)+","+value.cantidadEntrada[1][1].toString().substring(1))
                                                 :value.cantidadEntrada[1][1])}
                                         </td>
                                         <td>
                                             {(value.cantidadEntrada[1][2].toString().length > 6 ? 
                                                 (value.cantidadEntrada[1][2].toString().length>7 ? 
-                                                value.cantidadEntrada[1][2].toString().substring(0,2)+","+value.cantidadEntrada[1][2].toString().substring(2)
+                                                    (value.cantidadEntrada[1][2].toString().length>8 ? 
+                                                        value.cantidadEntrada[1][2].toString().substring(0,3)+","+value.cantidadEntrada[1][2].toString().substring(3)
+                                                        :value.cantidadEntrada[1][2].toString().substring(0,2)+","+value.cantidadEntrada[1][2].toString().substring(2))
                                                     :value.cantidadEntrada[1][2].toString().substring(0,1)+","+value.cantidadEntrada[1][2].toString().substring(1))
                                                 :value.cantidadEntrada[1][2])}
                                         </td>
                                         <td>
                                             {(value.cantidadEntrada[1][3].toString().length > 6 ? 
                                                 (value.cantidadEntrada[1][3].toString().length>7 ? 
-                                                value.cantidadEntrada[1][3].toString().substring(0,2)+","+value.cantidadEntrada[1][3].toString().substring(2)
+                                                    (value.cantidadEntrada[1][3].toString().length>8 ? 
+                                                        value.cantidadEntrada[1][3].toString().substring(0,3)+","+value.cantidadEntrada[1][3].toString().substring(3)
+                                                        :value.cantidadEntrada[1][3].toString().substring(0,2)+","+value.cantidadEntrada[1][3].toString().substring(2))
                                                     :value.cantidadEntrada[1][3].toString().substring(0,1)+","+value.cantidadEntrada[1][3].toString().substring(1))
                                                 :value.cantidadEntrada[1][3])}
                                         </td>
                                         <td style={{fontWeight : "bold"}}>
                                             {(value.cantidadEntrada[1][4].toString().length > 6 ? 
                                                 (value.cantidadEntrada[1][4].toString().length>7 ? 
-                                                value.cantidadEntrada[1][4].toString().substring(0,2)+","+value.cantidadEntrada[1][4].toString().substring(2)
+                                                    (value.cantidadEntrada[1][4].toString().length>8 ? 
+                                                        value.cantidadEntrada[1][4].toString().substring(0,3)+","+value.cantidadEntrada[1][4].toString().substring(3)
+                                                        :value.cantidadEntrada[1][4].toString().substring(0,2)+","+value.cantidadEntrada[1][4].toString().substring(2))
                                                     :value.cantidadEntrada[1][4].toString().substring(0,1)+","+value.cantidadEntrada[1][4].toString().substring(1))
                                                 :value.cantidadEntrada[1][4])}
                                         </td>
@@ -656,7 +677,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{fontWeight : "bold"}}>Gastos</th>
+                                <th style={{fontWeight : "bold",fontSize : "25px"}}>Gastos</th>
                                 <th style={{fontWeight : "bold"}}>Semana 1</th>
                                 <th style={{fontWeight : "bold"}}>Semana 2</th>
                                 <th style={{fontWeight : "bold"}}>Semana 3</th>
@@ -828,7 +849,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{fontWeight : "bold"}}>Diferencia</th>
+                                <th style={{fontWeight : "bold",fontSize : "25px"}}>Diferencia</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
