@@ -4,41 +4,42 @@ import StyleLogin from './Login.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons'
 
-export default class Login extends Component{
+export default class Login extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            username : "",
-            password : "",
-            iconPass : false
+            username: "",
+            password: "",
+            iconPass: false
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         localStorage.removeItem('userIdLocal')
         localStorage.removeItem('tokenLocal')
         localStorage.removeItem('isManager')
     }
 
-    consumir_login = () =>{
-        var postData={
+    consumir_login = () => {
+        var postData = {
             username: this.state.username,
-            password : this.state.password
-        }        
+            password: this.state.password
+        }
 
-        if(this.state.username === "" && this.state.password === ""){
+        if (this.state.username === "" && this.state.password === "") {
             alert("Debes rellenar todos los campos")
-        }else if(this.state.username === ""){
+        } else if (this.state.username === "") {
             alert("Campo Nombre de usuario no puede ser vacío")
-        }else if(this.state.password === ""){
+        } else if (this.state.password === "") {
             alert("Campo Contraseña no puede ser vacío")
-        }else{
+        } else {
             axios
                 .post("http://localhost:8000/cash_flow/login/user", postData, {
-                    Headers: { 
-                    'Content-Type': 'application/json',}
+                    Headers: {
+                        'Content-Type': 'application/json',
+                    }
                 })
                 .then((response) => {
                     localStorage.setItem('userIdLocal', response.data.user_id);
@@ -48,37 +49,37 @@ export default class Login extends Component{
                     window.location = "/home";
                 })
                 .catch((error) => {
-                    if(error.response.data.non_field_errors !== null){
+                    if (error.response.data.non_field_errors !== null) {
                         alert("Datos incorrectos");
                     }
                 })
         }
     }
 
-    setUsername = (e) =>{
+    setUsername = (e) => {
         this.setState({
-            username : e.target.value
+            username: e.target.value
         })
     }
 
-    setPassword = (e) =>{
+    setPassword = (e) => {
         this.setState({
-            password : e.target.value
+            password: e.target.value
         })
     }
 
-    verContraseña = () =>{
-        if(document.getElementById("pass").type === "password"){
+    verContraseña = () => {
+        if (document.getElementById("pass").type === "password") {
             document.getElementById("pass").type = "text"
-            this.setState({iconPass : true})
-        }else{
+            this.setState({ iconPass: true })
+        } else {
             document.getElementById("pass").type = "password"
-            this.setState({iconPass : false})
+            this.setState({ iconPass: false })
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className={StyleLogin.body}>
                 <div className={StyleLogin.background}>
                     <div className={StyleLogin.containerBackground}>
@@ -95,12 +96,12 @@ export default class Login extends Component{
                     </div>
                     <div className={StyleLogin.formContainer}>
                         <div className={StyleLogin.group}>
-                            <input onChange={this.setUsername} onBlur={this.setUsername} placeholder='Nombre de usuario' id="user"/>
+                            <input onChange={this.setUsername} onBlur={this.setUsername} placeholder='Nombre de usuario' id="user" />
                             {/* <FontAwesomeIcon icon={faUser} className={StyleLogin.icon} id={StyleLogin.userIcon}/> */}
                         </div>
                         <div className={StyleLogin.group}>
-                            <input onChange={this.setPassword} onBlur={this.setPassword} placeholder='Contraseña' type="password" id="pass"/>
-                            <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon}/>
+                            <input onChange={this.setPassword} onBlur={this.setPassword} placeholder='Contraseña' type="password" id="pass" />
+                            <FontAwesomeIcon icon={this.state.iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={this.verContraseña} id={StyleLogin.passIcon} />
                         </div>
                         <button id={StyleLogin.subtitle} onClick={this.consumir_login}>Iniciar sesión</button>
                     </div>
