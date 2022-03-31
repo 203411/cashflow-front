@@ -1,6 +1,6 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import {  Table, Button } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CategoriaCss from '../Categorias/Categorias.module.css'
@@ -41,20 +41,20 @@ export default function Indicadores() {
         rellenarForm(id);
     }, [id]);
 
-    const get_fecha = () =>{
+    const get_fecha = () => {
         let semana;
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
-        const dia = hoy.toDateString().substring(8,10)
-        if (dia<8) {
+        const dia = hoy.toDateString().substring(8, 10)
+        if (dia < 8) {
             semana = 1
-        }else if(dia>7 && dia<15){
+        } else if (dia > 7 && dia < 15) {
             semana = 2
-        }else if(dia>14 && dia<22){
+        } else if (dia > 14 && dia < 22) {
             semana = 3
-        }else if(dia>21 && dia<28){
+        } else if (dia > 21 && dia < 28) {
             semana = 4
-        }else if(dia>27){
+        } else if (dia > 27) {
             semana = 5
         }
         setNumSemana(semana)
@@ -63,11 +63,11 @@ export default function Indicadores() {
     const agregar_indicadores = () => {
         const data = {
             razon_social: razon_social,
-            monto : monto,
-            tipo : tipo
+            monto: monto,
+            tipo: tipo
         }
 
-        axios.post("http://localhost:8000/cash_flow/indicadores/dinero/"+num_semana, data, {
+        axios.post("http://localhost:8000/cash_flow/indicadores/dinero/" + num_semana, data, {
             headers: {
                 'Authorization': 'Token ' + token,
             }
@@ -79,12 +79,12 @@ export default function Indicadores() {
         })
 
     }
-    const rellenarForm = (id) =>{
-        axios.get("http://localhost:8000/cash_flow/indicadores/dinero/"+id,{
+    const rellenarForm = (id) => {
+        axios.get("http://localhost:8000/cash_flow/indicadores/dinero/" + id, {
             headers: {
                 'Authorization': 'Token ' + token,
             }
-        }).then((response) =>{
+        }).then((response) => {
             setTipo(response.data.tipo)
             document.getElementById("razon_social").value = response.data.razon_social
             setRazonSocial(response.data.razon_social)
@@ -104,7 +104,7 @@ export default function Indicadores() {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"></span>
                             </div>
-                            <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " max={5} min={1} aria-label="Amount (to the nearest dollar)" id="semana" disabled/>
+                            <input type="number" className="form-control" onChange={(e) => setNumSemana(e.target.value)} placeholder="Numero de semana " max={5} min={1} aria-label="Amount (to the nearest dollar)" id="semana" disabled />
                         </div>
                     </div>
                     <div className='col-sm-5'>
@@ -127,7 +127,7 @@ export default function Indicadores() {
                         <input type="text" class="form-control" onChange={(e) => setRazonSocial(e.target.value)} placeholder="Razon social o descripcion del movimiento " aria-label="Amount (to the nearest dollar)" id="razon_social" />
                     </div>
                 </Form.Group>
-                <Form.Group className="mb-2 mt-2" controlId="formBasicPassword" style={{display:"flex", justifyContent: "center", alignItems: "center"}}>
+                <Form.Group className="mb-2 mt-2" controlId="formBasicPassword" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className='col-sm-5'>
                         <label>Monto:</label>
                         <div className="input-group mb-3">
@@ -146,29 +146,29 @@ export default function Indicadores() {
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{width: "21vh", textAlign : "center"}}>Tipo</th>
-                                <th style={{width: "35vh", textAlign : "center"}}>Descripcion</th>
-                                <th style={{width: "6vh", textAlign : "center"}}>Mes</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Semana 1</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Semana 2</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Semana 3</th>
-                                <th style={{width: "16vh", textAlign : "center"}}>Semana 4</th>
-                                <th style={{width: "18vh", textAlign : "center"}}>Semana 5</th>
+                                <th style={{ width: "21vh", textAlign: "center" }}>Tipo</th>
+                                <th style={{ width: "35vh", textAlign: "center" }}>Descripcion</th>
+                                <th style={{ width: "6vh", textAlign: "center" }}>Mes</th>
+                                <th style={{ width: "16vh", textAlign: "center" }}>Semana 1</th>
+                                <th style={{ width: "16vh", textAlign: "center" }}>Semana 2</th>
+                                <th style={{ width: "16vh", textAlign: "center" }}>Semana 3</th>
+                                <th style={{ width: "16vh", textAlign: "center" }}>Semana 4</th>
+                                <th style={{ width: "18vh", textAlign: "center" }}>Semana 5</th>
                             </tr>
                         </thead>
                         <tbody>
                             {listIndicadores.length > 0 ?
                                 (listIndicadores.map((value) => (
-                                    <tr key={value.id}  onClick={() => setId(value.id)}>
+                                    <tr key={value.id} onClick={() => setId(value.id)}>
                                         {/* <td>{value.id}</td> */}
-                                        <td style={{width: "21vh", textAlign : "center"}}>{value.tipo}</td>
-                                        <td style={{width: "35vh", textAlign : "center"}}>{value.razon_social}</td>
-                                        <td style={{width: "6vh", textAlign : "center"}}>{value.mes}</td> 
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana1}</td>
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana2}</td>
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana3}</td>
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana4}</td>
-                                        <td style={{width: "16vh", textAlign : "center"}}>{value.semana5}</td>
+                                        <td style={{ width: "21vh", textAlign: "center" }}>{value.tipo}</td>
+                                        <td style={{ width: "35vh", textAlign: "center" }}>{value.razon_social}</td>
+                                        <td style={{ width: "6vh", textAlign: "center" }}>{value.mes}</td>
+                                        <td style={{ width: "16vh", textAlign: "center" }}>{value.semana1}</td>
+                                        <td style={{ width: "16vh", textAlign: "center" }}>{value.semana2}</td>
+                                        <td style={{ width: "16vh", textAlign: "center" }}>{value.semana3}</td>
+                                        <td style={{ width: "16vh", textAlign: "center" }}>{value.semana4}</td>
+                                        <td style={{ width: "16vh", textAlign: "center" }}>{value.semana5}</td>
                                     </tr>
                                 ))
                                 ) : (

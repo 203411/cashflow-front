@@ -73,7 +73,7 @@ export default function Categorias() {
                     setCategoria("");
                     setSubCategoria("");
                 }).catch((error) => {
-                    if(error.response != null){
+                    if (error.response != null) {
                         console.log(error.response.data)
                     }
                 })
@@ -136,7 +136,7 @@ export default function Categorias() {
 
     return (
         <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)' }}>
-            <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px', minWidth: '50%'}}>
+            <Form className='mt-4, pb-4 ' style={{ background: 'white', padding: '1%', borderRadius: '10px', minWidth: '50%' }}>
                 <Form.Group className="mb-4 mt-4" controlId="formBasicPassword">
                     <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Gestion de Categorias</div>
                 </Form.Group>
@@ -167,9 +167,9 @@ export default function Categorias() {
                         <thead>
                             <tr>
                                 {/* <th>#</th> */}
-                                <th style={{width: "30vh"}}>Categoria</th>
-                                <th style={{width: "45vh"}}>Sub-Categoria</th>
-                                <th style={{width: "20vh"}}>Acciones</th>
+                                <th style={{ width: "30vh" }}>Categoria</th>
+                                <th style={{ width: "45vh" }}>Sub-Categoria</th>
+                                <th style={{ width: "20vh" }}>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -177,10 +177,10 @@ export default function Categorias() {
                                 (listCategorias.map((value) => (
                                     <tr key={value.id}>
                                         {/* <td>{value.id}</td> */}
-                                        <td style={{width: "30vh", height : "10vh"}}>{value.descripcion}</td> 
-                                        <td style={{width: "45vh", height : "10vh"}}>{value.sub_categoria}</td>
-                                        <td style={{width: "18vh"}}>
-                                            <Button className="btn btn-primary btn-sm" style={{width:"95%"}} onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit}/></Button>
+                                        <td style={{ width: "30vh", height: "10vh" }}>{value.descripcion}</td>
+                                        <td style={{ width: "45vh", height: "10vh" }}>{value.sub_categoria}</td>
+                                        <td style={{ width: "18vh" }}>
+                                            <Button className="btn btn-primary btn-sm" style={{ width: "95%" }} onClick={() => handleShow(value)}><FontAwesomeIcon icon={faEdit} /></Button>
                                         </td>
                                     </tr>
                                 ))
