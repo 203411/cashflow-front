@@ -94,54 +94,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (cobrar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{(value.semana1.toString().length > 6 ?
-                                                (value.semana1.toString().length>7 ? 
-                                                    (value.semana1.toString().length>8 ? 
-                                                        value.semana1.toString().substring(0,3)+","+value.semana1.toString().substring(3)
-                                                        :value.semana1.toString().substring(0,2)+","+value.semana1.toString().substring(2))
-                                                    :value.semana1.toString().substring(0,1)+","+value.semana1.toString().substring(1))
-                                                :value.semana1)}
-                                        </td>
-                                        <td>{(value.semana2.toString().length > 6 ? 
-                                                (value.semana2.toString().length>7 ? 
-                                                    (value.semana2.toString().length>8 ? 
-                                                        value.semana2.toString().substring(0,3)+","+value.semana2.toString().substring(3)
-                                                        :value.semana2.toString().substring(0,2)+","+value.semana2.toString().substring(2))
-                                                    :value.semana2.toString().substring(0,1)+","+value.semana2.toString().substring(1))
-                                                :value.semana2)}
-                                        </td>
-                                        <td>{(value.semana3.toString().length > 6 ? 
-                                                (value.semana3.toString().length>7 ? 
-                                                    (value.semana3.toString().length>8 ? 
-                                                        value.semana3.toString().substring(0,3)+","+value.semana3.toString().substring(3)
-                                                        :value.semana3.toString().substring(0,2)+","+value.semana3.toString().substring(2))
-                                                    :value.semana3.toString().substring(0,1)+","+value.semana3.toString().substring(1))
-                                                :value.semana3)}
-                                        </td>
-                                        <td>{(value.semana4.toString().length > 6 ? 
-                                                (value.semana4.toString().length>7 ? 
-                                                    (value.semana4.toString().length>8 ? 
-                                                        value.semana4.toString().substring(0,3)+","+value.semana4.toString().substring(3)
-                                                        :value.semana4.toString().substring(0,2)+","+value.semana4.toString().substring(2))
-                                                    :value.semana4.toString().substring(0,1)+","+value.semana4.toString().substring(1))
-                                                :value.semana4)}
-                                        </td>
-                                        <td>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
+                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -154,60 +112,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Cuentas por cobrar</td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[0].toString().length > 6 ? 
-                                        (totalCobrar[0].toString().length>7 ? 
-                                            (totalCobrar[0].toString().length>8 ? 
-                                                totalCobrar[0].toString().substring(0,3)+","+totalCobrar[0].toString().substring(3)
-                                                :totalCobrar[0].toString().substring(0,2)+","+totalCobrar[0].toString().substring(2))
-                                            :totalCobrar[0].toString().substring(0,1)+","+totalCobrar[0].toString().substring(1))
-                                        :totalCobrar[0])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[1].toString().length > 6 ? 
-                                        (totalCobrar[1].toString().length>7 ? 
-                                            (totalCobrar[1].toString().length>8 ? 
-                                                totalCobrar[1].toString().substring(0,3)+","+totalCobrar[1].toString().substring(3)
-                                                :totalCobrar[1].toString().substring(0,2)+","+totalCobrar[1].toString().substring(2))
-                                            :totalCobrar[1].toString().substring(0,1)+","+totalCobrar[1].toString().substring(1))
-                                        :totalCobrar[1])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[2].toString().length > 6 ? 
-                                        (totalCobrar[2].toString().length>7 ? 
-                                            (totalCobrar[2].toString().length>8 ? 
-                                                totalCobrar[2].toString().substring(0,3)+","+totalCobrar[2].toString().substring(3)
-                                                :totalCobrar[2].toString().substring(0,2)+","+totalCobrar[2].toString().substring(2))
-                                            :totalCobrar[2].toString().substring(0,1)+","+totalCobrar[2].toString().substring(1))
-                                        :totalCobrar[2])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[3].toString().length > 6 ? 
-                                        (totalCobrar[3].toString().length>7 ? 
-                                            (totalCobrar[3].toString().length>8 ? 
-                                                totalCobrar[3].toString().substring(0,3)+","+totalCobrar[3].toString().substring(3)
-                                                :totalCobrar[3].toString().substring(0,2)+","+totalCobrar[3].toString().substring(2))
-                                            :totalCobrar[3].toString().substring(0,1)+","+totalCobrar[3].toString().substring(1))
-                                        :totalCobrar[3])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[4].toString().length > 6 ? 
-                                        (totalCobrar[4].toString().length>7 ? 
-                                            (totalCobrar[4].toString().length>8 ? 
-                                                totalCobrar[4].toString().substring(0,3)+","+totalCobrar[4].toString().substring(3)
-                                                :totalCobrar[4].toString().substring(0,2)+","+totalCobrar[4].toString().substring(2))
-                                            :totalCobrar[4].toString().substring(0,1)+","+totalCobrar[4].toString().substring(1))
-                                        :totalCobrar[4])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalCobrar[5].toString().length > 6 ? 
-                                        (totalCobrar[5].toString().length>7 ? 
-                                            (totalCobrar[5].toString().length>8 ? 
-                                                totalCobrar[5].toString().substring(0,3)+","+totalCobrar[5].toString().substring(3)
-                                                :totalCobrar[5].toString().substring(0,2)+","+totalCobrar[5].toString().substring(2))
-                                            :totalCobrar[5].toString().substring(0,1)+","+totalCobrar[5].toString().substring(1))
-                                        :totalCobrar[5])}
-                                </td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[0]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[1]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[2]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[3]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[4]).toLocaleString('en-US')}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -229,54 +139,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (pagar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{(value.semana1.toString().length > 6 ? 
-                                                (value.semana1.toString().length>7 ? 
-                                                    (value.semana1.toString().length>8 ? 
-                                                        value.semana1.toString().substring(0,3)+","+value.semana1.toString().substring(3)
-                                                        :value.semana1.toString().substring(0,2)+","+value.semana1.toString().substring(2))
-                                                    :value.semana1.toString().substring(0,1)+","+value.semana1.toString().substring(1))
-                                                :value.semana1)}
-                                        </td>
-                                        <td>{(value.semana2.toString().length > 6 ? 
-                                                (value.semana2.toString().length>7 ? 
-                                                    (value.semana2.toString().length>8 ? 
-                                                        value.semana2.toString().substring(0,3)+","+value.semana2.toString().substring(3)
-                                                        :value.semana2.toString().substring(0,2)+","+value.semana2.toString().substring(2))
-                                                    :value.semana2.toString().substring(0,1)+","+value.semana2.toString().substring(1))
-                                                :value.semana2)}
-                                        </td>
-                                        <td>{(value.semana3.toString().length > 6 ? 
-                                                (value.semana3.toString().length>7 ? 
-                                                    (value.semana3.toString().length>8 ? 
-                                                        value.semana3.toString().substring(0,3)+","+value.semana3.toString().substring(3)
-                                                        :value.semana3.toString().substring(0,2)+","+value.semana3.toString().substring(2))
-                                                    :value.semana3.toString().substring(0,1)+","+value.semana3.toString().substring(1))
-                                                :value.semana3)}
-                                        </td>
-                                        <td>{(value.semana4.toString().length > 6 ? 
-                                                (value.semana4.toString().length>7 ? 
-                                                    (value.semana4.toString().length>8 ? 
-                                                        value.semana4.toString().substring(0,3)+","+value.semana4.toString().substring(3)
-                                                        :value.semana4.toString().substring(0,2)+","+value.semana4.toString().substring(2))
-                                                    :value.semana4.toString().substring(0,1)+","+value.semana4.toString().substring(1))
-                                                :value.semana4)}
-                                        </td>
-                                        <td>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
+                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -289,60 +157,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Cuentas por pagar</td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[0].toString().length > 6 ? 
-                                        (totalPagar[0].toString().length>7 ? 
-                                            (totalPagar[0].toString().length>8 ? 
-                                                totalPagar[0].toString().substring(0,3)+","+totalPagar[0].toString().substring(3)
-                                                :totalPagar[0].toString().substring(0,2)+","+totalPagar[0].toString().substring(2))
-                                            :totalPagar[0].toString().substring(0,1)+","+totalPagar[0].toString().substring(1))
-                                        :totalPagar[0])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[1].toString().length > 6 ? 
-                                        (totalPagar[1].toString().length>7 ? 
-                                            (totalPagar[1].toString().length>8 ? 
-                                                totalPagar[1].toString().substring(0,3)+","+totalPagar[1].toString().substring(3)
-                                                :totalPagar[1].toString().substring(0,2)+","+totalPagar[1].toString().substring(2))
-                                            :totalPagar[1].toString().substring(0,1)+","+totalPagar[1].toString().substring(1))
-                                        :totalPagar[1])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[2].toString().length > 6 ? 
-                                        (totalPagar[2].toString().length>7 ? 
-                                            (totalPagar[2].toString().length>8 ? 
-                                                totalPagar[2].toString().substring(0,3)+","+totalPagar[2].toString().substring(3)
-                                                :totalPagar[2].toString().substring(0,2)+","+totalPagar[2].toString().substring(2))
-                                            :totalPagar[2].toString().substring(0,1)+","+totalPagar[2].toString().substring(1))
-                                        :totalPagar[2])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[3].toString().length > 6 ? 
-                                        (totalPagar[3].toString().length>7 ? 
-                                            (totalPagar[3].toString().length>8 ? 
-                                                totalPagar[3].toString().substring(0,3)+","+totalPagar[3].toString().substring(3)
-                                                :totalPagar[3].toString().substring(0,2)+","+totalPagar[3].toString().substring(2))
-                                            :totalPagar[3].toString().substring(0,1)+","+totalPagar[3].toString().substring(1))
-                                        :totalPagar[3])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[4].toString().length > 6 ? 
-                                        (totalPagar[4].toString().length>7 ? 
-                                            (totalPagar[4].toString().length>8 ? 
-                                                totalPagar[4].toString().substring(0,3)+","+totalPagar[4].toString().substring(3)
-                                                :totalPagar[4].toString().substring(0,2)+","+totalPagar[4].toString().substring(2))
-                                            :totalPagar[4].toString().substring(0,1)+","+totalPagar[4].toString().substring(1))
-                                        :totalPagar[4])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalPagar[5].toString().length > 6 ? 
-                                        (totalPagar[5].toString().length>7 ? 
-                                            (totalPagar[5].toString().length>8 ? 
-                                                totalPagar[5].toString().substring(0,3)+","+totalPagar[5].toString().substring(3)
-                                                :totalPagar[5].toString().substring(0,2)+","+totalPagar[5].toString().substring(2))
-                                            :totalPagar[5].toString().substring(0,1)+","+totalPagar[5].toString().substring(1))
-                                        :totalPagar[5])}
-                                </td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[0]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[1]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[2]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[3]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[4]).toLocaleString('en-US')}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -364,54 +184,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (bancos.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{(value.semana1.toString().length > 6 ? 
-                                                (value.semana1.toString().length>7 ? 
-                                                    (value.semana1.toString().length>8 ? 
-                                                        value.semana1.toString().substring(0,3)+","+value.semana1.toString().substring(3)
-                                                        :value.semana1.toString().substring(0,2)+","+value.semana1.toString().substring(2))
-                                                    :value.semana1.toString().substring(0,1)+","+value.semana1.toString().substring(1))
-                                                :value.semana1)}
-                                        </td>
-                                        <td>{(value.semana2.toString().length > 6 ? 
-                                                (value.semana2.toString().length>7 ? 
-                                                    (value.semana2.toString().length>8 ? 
-                                                        value.semana2.toString().substring(0,3)+","+value.semana2.toString().substring(3)
-                                                        :value.semana2.toString().substring(0,2)+","+value.semana2.toString().substring(2))
-                                                    :value.semana2.toString().substring(0,1)+","+value.semana2.toString().substring(1))
-                                                :value.semana2)}
-                                        </td>
-                                        <td>{(value.semana3.toString().length > 6 ? 
-                                                (value.semana3.toString().length>7 ? 
-                                                    (value.semana3.toString().length>8 ? 
-                                                        value.semana3.toString().substring(0,3)+","+value.semana3.toString().substring(3)
-                                                        :value.semana3.toString().substring(0,2)+","+value.semana3.toString().substring(2))
-                                                    :value.semana3.toString().substring(0,1)+","+value.semana3.toString().substring(1))
-                                                :value.semana3)}
-                                        </td>
-                                        <td>{(value.semana4.toString().length > 6 ? 
-                                                (value.semana4.toString().length>7 ? 
-                                                    (value.semana4.toString().length>8 ? 
-                                                        value.semana4.toString().substring(0,3)+","+value.semana4.toString().substring(3)
-                                                        :value.semana4.toString().substring(0,2)+","+value.semana4.toString().substring(2))
-                                                    :value.semana4.toString().substring(0,1)+","+value.semana4.toString().substring(1))
-                                                :value.semana4)}
-                                        </td>
-                                        <td>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{(value.semana5.toString().length > 6 ? 
-                                                (value.semana5.toString().length>7 ? 
-                                                    (value.semana5.toString().length>8 ? 
-                                                        value.semana5.toString().substring(0,3)+","+value.semana5.toString().substring(3)
-                                                        :value.semana5.toString().substring(0,2)+","+value.semana5.toString().substring(2))
-                                                    :value.semana5.toString().substring(0,1)+","+value.semana5.toString().substring(1))
-                                                :value.semana5)}
-                                        </td>
+                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -424,60 +202,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Bancos</td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[0].toString().length > 6 ? 
-                                        (totalBancos[0].toString().length>7 ? 
-                                            (totalBancos[0].toString().length>8 ? 
-                                                totalBancos[0].toString().substring(0,3)+","+totalBancos[0].toString().substring(3)
-                                                :totalBancos[0].toString().substring(0,2)+","+totalBancos[0].toString().substring(2))
-                                            :totalBancos[0].toString().substring(0,1)+","+totalBancos[0].toString().substring(1))
-                                        :totalBancos[0])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[1].toString().length > 6 ? 
-                                        (totalBancos[1].toString().length>7 ? 
-                                            (totalBancos[1].toString().length>8 ? 
-                                                totalBancos[1].toString().substring(0,3)+","+totalBancos[1].toString().substring(3)
-                                                :totalBancos[1].toString().substring(0,2)+","+totalBancos[1].toString().substring(2))
-                                            :totalBancos[1].toString().substring(0,1)+","+totalBancos[1].toString().substring(1))
-                                        :totalBancos[1])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[2].toString().length > 6 ? 
-                                        (totalBancos[2].toString().length>7 ? 
-                                            (totalBancos[2].toString().length>8 ? 
-                                                totalBancos[2].toString().substring(0,3)+","+totalBancos[2].toString().substring(3)
-                                                :totalBancos[2].toString().substring(0,2)+","+totalBancos[2].toString().substring(2))
-                                            :totalBancos[2].toString().substring(0,1)+","+totalBancos[2].toString().substring(1))
-                                        :totalBancos[2])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[3].toString().length > 6 ? 
-                                        (totalBancos[3].toString().length>7 ? 
-                                            (totalBancos[3].toString().length>8 ? 
-                                                totalBancos[3].toString().substring(0,3)+","+totalBancos[3].toString().substring(3)
-                                                :totalBancos[3].toString().substring(0,2)+","+totalBancos[3].toString().substring(2))
-                                            :totalBancos[3].toString().substring(0,1)+","+totalBancos[3].toString().substring(1))
-                                        :totalBancos[3])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[4].toString().length > 6 ? 
-                                        (totalBancos[4].toString().length>7 ? 
-                                            (totalBancos[4].toString().length>8 ? 
-                                                totalBancos[4].toString().substring(0,3)+","+totalBancos[4].toString().substring(3)
-                                                :totalBancos[4].toString().substring(0,2)+","+totalBancos[4].toString().substring(2))
-                                            :totalBancos[4].toString().substring(0,1)+","+totalBancos[4].toString().substring(1))
-                                        :totalBancos[4])}
-                                </td>
-                                <td style={{fontWeight : "bold"}}>
-                                    {(totalBancos[5].toString().length > 6 ? 
-                                        (totalBancos[5].toString().length>7 ? 
-                                            (totalBancos[5].toString().length>8 ? 
-                                                totalBancos[5].toString().substring(0,3)+","+totalBancos[5].toString().substring(3)
-                                                :totalBancos[5].toString().substring(0,2)+","+totalBancos[5].toString().substring(2))
-                                            :totalBancos[5].toString().substring(0,1)+","+totalBancos[5].toString().substring(1))
-                                        :totalBancos[5])}
-                                </td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[0]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[1]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[2]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[3]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[4]).toLocaleString('en-US')}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -498,51 +228,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Efectivo</td>
-                                        <td>
-                                            {(value.cantidadEntrada[0][0].toString().length > 6 ? 
-                                                (value.cantidadEntrada[0][0].toString().length>7 ? 
-                                                    (value.cantidadEntrada[0][0].toString().length>8 ? 
-                                                        value.cantidadEntrada[0][0].toString().substring(0,3)+","+value.cantidadEntrada[0][0].toString().substring(3)
-                                                        :value.cantidadEntrada[0][0].toString().substring(0,2)+","+value.cantidadEntrada[0][0].toString().substring(2))
-                                                    :value.cantidadEntrada[0][0].toString().substring(0,1)+","+value.cantidadEntrada[0][0].toString().substring(1))
-                                                :value.cantidadEntrada[0][0])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadEntrada[0][1].toString().length > 6 ? 
-                                                (value.cantidadEntrada[0][1].toString().length>7 ? 
-                                                    (value.cantidadEntrada[0][1].toString().length>8 ? 
-                                                        value.cantidadEntrada[0][1].toString().substring(0,3)+","+value.cantidadEntrada[0][1].toString().substring(3)
-                                                        :value.cantidadEntrada[0][1].toString().substring(0,2)+","+value.cantidadEntrada[0][1].toString().substring(2))
-                                                    :value.cantidadEntrada[0][1].toString().substring(0,1)+","+value.cantidadEntrada[0][1].toString().substring(1))
-                                                :value.cantidadEntrada[0][1])}
-                                        </td>
-                                        <td>
-                                        {(value.cantidadEntrada[0][2].toString().length > 6 ? 
-                                                (value.cantidadEntrada[0][2].toString().length>7 ? 
-                                                    (value.cantidadEntrada[0][2].toString().length>8 ? 
-                                                        value.cantidadEntrada[0][2].toString().substring(0,3)+","+value.cantidadEntrada[0][2].toString().substring(3)
-                                                        :value.cantidadEntrada[0][2].toString().substring(0,2)+","+value.cantidadEntrada[0][2].toString().substring(2))
-                                                    :value.cantidadEntrada[0][2].toString().substring(0,1)+","+value.cantidadEntrada[0][2].toString().substring(1))
-                                                :value.cantidadEntrada[0][2])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadEntrada[0][3].toString().length > 6 ? 
-                                                (value.cantidadEntrada[0][3].toString().length>7 ? 
-                                                    (value.cantidadEntrada[0][3].toString().length>8 ? 
-                                                        value.cantidadEntrada[0][3].toString().substring(0,3)+","+value.cantidadEntrada[0][3].toString().substring(3)
-                                                        :value.cantidadEntrada[0][3].toString().substring(0,2)+","+value.cantidadEntrada[0][3].toString().substring(2))
-                                                    :value.cantidadEntrada[0][3].toString().substring(0,1)+","+value.cantidadEntrada[0][3].toString().substring(1))
-                                                :value.cantidadEntrada[0][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.cantidadEntrada[0][4].toString().length > 6 ? 
-                                                (value.cantidadEntrada[0][4].toString().length>7 ? 
-                                                    (value.cantidadEntrada[0][4].toString().length>8 ? 
-                                                        value.cantidadEntrada[0][4].toString().substring(0,3)+","+value.cantidadEntrada[0][4].toString().substring(3)
-                                                        :value.cantidadEntrada[0][4].toString().substring(0,2)+","+value.cantidadEntrada[0][4].toString().substring(2))
-                                                    :value.cantidadEntrada[0][4].toString().substring(0,1)+","+value.cantidadEntrada[0][4].toString().substring(1))
-                                                :value.cantidadEntrada[0][4])}
-                                        </td>
+                                        <td>{parseFloat(value.cantidadEntrada[0][0]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[0][1]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[0][2]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[0][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[0][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -557,51 +247,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Tarjeta de Crédito</td>
-                                        <td>
-                                            {(value.cantidadEntrada[1][0].toString().length > 6 ? 
-                                                (value.cantidadEntrada[1][0].toString().length>7 ? 
-                                                    (value.cantidadEntrada[1][0].toString().length>8 ? 
-                                                        value.cantidadEntrada[1][0].toString().substring(0,3)+","+value.cantidadEntrada[1][0].toString().substring(3)
-                                                        :value.cantidadEntrada[1][0].toString().substring(0,2)+","+value.cantidadEntrada[1][0].toString().substring(2))
-                                                    :value.cantidadEntrada[1][0].toString().substring(0,1)+","+value.cantidadEntrada[1][0].toString().substring(1))
-                                                :value.cantidadEntrada[1][0])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadEntrada[1][1].toString().length > 6 ? 
-                                                (value.cantidadEntrada[1][1].toString().length>7 ? 
-                                                    (value.cantidadEntrada[1][1].toString().length>8 ? 
-                                                        value.cantidadEntrada[1][1].toString().substring(0,3)+","+value.cantidadEntrada[1][1].toString().substring(3)
-                                                        :value.cantidadEntrada[1][1].toString().substring(0,2)+","+value.cantidadEntrada[1][1].toString().substring(2))
-                                                    :value.cantidadEntrada[1][1].toString().substring(0,1)+","+value.cantidadEntrada[1][1].toString().substring(1))
-                                                :value.cantidadEntrada[1][1])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadEntrada[1][2].toString().length > 6 ? 
-                                                (value.cantidadEntrada[1][2].toString().length>7 ? 
-                                                    (value.cantidadEntrada[1][2].toString().length>8 ? 
-                                                        value.cantidadEntrada[1][2].toString().substring(0,3)+","+value.cantidadEntrada[1][2].toString().substring(3)
-                                                        :value.cantidadEntrada[1][2].toString().substring(0,2)+","+value.cantidadEntrada[1][2].toString().substring(2))
-                                                    :value.cantidadEntrada[1][2].toString().substring(0,1)+","+value.cantidadEntrada[1][2].toString().substring(1))
-                                                :value.cantidadEntrada[1][2])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadEntrada[1][3].toString().length > 6 ? 
-                                                (value.cantidadEntrada[1][3].toString().length>7 ? 
-                                                    (value.cantidadEntrada[1][3].toString().length>8 ? 
-                                                        value.cantidadEntrada[1][3].toString().substring(0,3)+","+value.cantidadEntrada[1][3].toString().substring(3)
-                                                        :value.cantidadEntrada[1][3].toString().substring(0,2)+","+value.cantidadEntrada[1][3].toString().substring(2))
-                                                    :value.cantidadEntrada[1][3].toString().substring(0,1)+","+value.cantidadEntrada[1][3].toString().substring(1))
-                                                :value.cantidadEntrada[1][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.cantidadEntrada[1][4].toString().length > 6 ? 
-                                                (value.cantidadEntrada[1][4].toString().length>7 ? 
-                                                    (value.cantidadEntrada[1][4].toString().length>8 ? 
-                                                        value.cantidadEntrada[1][4].toString().substring(0,3)+","+value.cantidadEntrada[1][4].toString().substring(3)
-                                                        :value.cantidadEntrada[1][4].toString().substring(0,2)+","+value.cantidadEntrada[1][4].toString().substring(2))
-                                                    :value.cantidadEntrada[1][4].toString().substring(0,1)+","+value.cantidadEntrada[1][4].toString().substring(1))
-                                                :value.cantidadEntrada[1][4])}
-                                        </td>
+                                        <td>{parseFloat(value.cantidadEntrada[1][0]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[1][1]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[1][2]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadEntrada[1][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[1][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -616,51 +266,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td style={{fontWeight : "bold"}}>Total Ingresos</td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadEntrada[2][0] === 1 ? 0 
-                                            :(value.cantidadEntrada[2][0].toString().length>6? 
-                                            (value.cantidadEntrada[2][0].toString().length>7? 
-                                                (value.cantidadEntrada[2][0].toString().length>8? 
-                                                    value.cantidadEntrada[2][0].toString().substring(0,3)+","+value.cantidadEntrada[2][0].toString().substring(3)
-                                                    :value.cantidadEntrada[2][0].toString().substring(0,2)+","+value.cantidadEntrada[2][0].toString().substring(2))
-                                                :value.cantidadEntrada[2][0].toString().substring(0,1)+","+value.cantidadEntrada[2][0].toString().substring(1))
-                                            :value.cantidadEntrada[2][0])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadEntrada[2][1] === 1 ? 0 
-                                            :(value.cantidadEntrada[2][1].toString().length>6? 
-                                            (value.cantidadEntrada[2][1].toString().length>7? 
-                                                (value.cantidadEntrada[2][1].toString().length>8? 
-                                                    value.cantidadEntrada[2][1].toString().substring(0,3)+","+value.cantidadEntrada[2][1].toString().substring(3)
-                                                    :value.cantidadEntrada[2][1].toString().substring(0,2)+","+value.cantidadEntrada[2][1].toString().substring(2))
-                                                :value.cantidadEntrada[2][1].toString().substring(0,1)+","+value.cantidadEntrada[2][1].toString().substring(1))
-                                            :value.cantidadEntrada[2][1])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadEntrada[2][2] === 1 ? 0 
-                                            :(value.cantidadEntrada[2][2].toString().length>6? 
-                                            (value.cantidadEntrada[2][2].toString().length>7? 
-                                                (value.cantidadEntrada[2][2].toString().length>8? 
-                                                    value.cantidadEntrada[2][2].toString().substring(0,3)+","+value.cantidadEntrada[2][2].toString().substring(3)
-                                                    :value.cantidadEntrada[2][2].toString().substring(0,2)+","+value.cantidadEntrada[2][2].toString().substring(2))
-                                                :value.cantidadEntrada[2][2].toString().substring(0,1)+","+value.cantidadEntrada[2][2].toString().substring(1))
-                                            :value.cantidadEntrada[2][2])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadEntrada[2][3] === 1 ? 0 
-                                            :(value.cantidadEntrada[2][3].toString().length>6? 
-                                            (value.cantidadEntrada[2][3].toString().length>7? 
-                                                (value.cantidadEntrada[2][3].toString().length>8? 
-                                                    value.cantidadEntrada[2][3].toString().substring(0,3)+","+value.cantidadEntrada[2][3].toString().substring(3)
-                                                    :value.cantidadEntrada[2][3].toString().substring(0,2)+","+value.cantidadEntrada[2][3].toString().substring(2))
-                                                :value.cantidadEntrada[2][3].toString().substring(0,1)+","+value.cantidadEntrada[2][3].toString().substring(1))
-                                            :value.cantidadEntrada[2][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadEntrada[2][4] === 4 ? 0 
-                                            :(value.cantidadEntrada[2][4].toString().length>6? 
-                                            (value.cantidadEntrada[2][4].toString().length>7? 
-                                                (value.cantidadEntrada[2][4].toString().length>8? 
-                                                    value.cantidadEntrada[2][4].toString().substring(0,3)+","+value.cantidadEntrada[2][4].toString().substring(3)
-                                                    :value.cantidadEntrada[2][4].toString().substring(0,2)+","+value.cantidadEntrada[2][4].toString().substring(2))
-                                                :value.cantidadEntrada[2][4].toString().substring(0,1)+","+value.cantidadEntrada[2][4].toString().substring(1))
-                                            :value.cantidadEntrada[2][4])}
-                                        </td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][0]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][1]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][2]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -690,41 +300,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Costos de Ventas</td>
-                                        <td>
-                                            {(value.cantidadSalida[0][0].toString().length > 6 ? 
-                                                (value.cantidadSalida[0][0].toString().length>7 ? 
-                                                value.cantidadSalida[0][0].toString().substring(0,2)+","+value.cantidadSalida[0][0].toString().substring(2)
-                                                    :value.cantidadSalida[0][0].toString().substring(0,1)+","+value.cantidadSalida[0][0].toString().substring(1))
-                                                :value.cantidadSalida[0][0])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[0][1].toString().length > 6 ? 
-                                                (value.cantidadSalida[0][1].toString().length>7 ? 
-                                                value.cantidadSalida[0][1].toString().substring(0,2)+","+value.cantidadSalida[0][1].toString().substring(2)
-                                                    :value.cantidadSalida[0][1].toString().substring(0,1)+","+value.cantidadSalida[0][1].toString().substring(1))
-                                                :value.cantidadSalida[0][1])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[0][2].toString().length > 6 ? 
-                                                (value.cantidadSalida[0][2].toString().length>7 ? 
-                                                value.cantidadSalida[0][2].toString().substring(0,2)+","+value.cantidadSalida[0][2].toString().substring(2)
-                                                    :value.cantidadSalida[0][2].toString().substring(0,1)+","+value.cantidadSalida[0][2].toString().substring(1))
-                                                :value.cantidadSalida[0][2])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[0][3].toString().length > 6 ? 
-                                                (value.cantidadSalida[0][3].toString().length>7 ? 
-                                                value.cantidadSalida[0][3].toString().substring(0,2)+","+value.cantidadSalida[0][3].toString().substring(2)
-                                                    :value.cantidadSalida[0][3].toString().substring(0,1)+","+value.cantidadSalida[0][3].toString().substring(1))
-                                                :value.cantidadSalida[0][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.cantidadSalida[0][4].toString().length > 6 ? 
-                                                (value.cantidadSalida[0][4].toString().length>7 ? 
-                                                value.cantidadSalida[0][4].toString().substring(0,2)+","+value.cantidadSalida[0][4].toString().substring(2)
-                                                    :value.cantidadSalida[0][4].toString().substring(0,1)+","+value.cantidadSalida[0][4].toString().substring(1))
-                                                :value.cantidadSalida[0][4])}
-                                        </td>
+                                        <td>{parseFloat(value.cantidadSalida[0][0]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[0][1]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[0][2]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[0][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[0][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -739,41 +319,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Gastos Fijos Operativos</td>
-                                        <td>
-                                            {(value.cantidadSalida[1][0].toString().length > 6 ? 
-                                                (value.cantidadSalida[1][0].toString().length>7 ? 
-                                                value.cantidadSalida[1][0].toString().substring(0,2)+","+value.cantidadSalida[1][0].toString().substring(2)
-                                                    :value.cantidadSalida[1][0].toString().substring(0,1)+","+value.cantidadSalida[1][0].toString().substring(1))
-                                                :value.cantidadSalida[1][0])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[1][1].toString().length > 6 ? 
-                                                (value.cantidadSalida[1][1].toString().length>7 ? 
-                                                value.cantidadSalida[1][1].toString().substring(0,2)+","+value.cantidadSalida[1][1].toString().substring(2)
-                                                    :value.cantidadSalida[1][1].toString().substring(0,1)+","+value.cantidadSalida[1][1].toString().substring(1))
-                                                :value.cantidadSalida[1][1])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[1][2].toString().length > 6 ? 
-                                                (value.cantidadSalida[1][2].toString().length>7 ? 
-                                                value.cantidadSalida[1][2].toString().substring(0,2)+","+value.cantidadSalida[1][2].toString().substring(2)
-                                                    :value.cantidadSalida[1][2].toString().substring(0,1)+","+value.cantidadSalida[1][2].toString().substring(1))
-                                                :value.cantidadSalida[1][2])}
-                                        </td>
-                                        <td>
-                                            {(value.cantidadSalida[1][3].toString().length > 6 ? 
-                                                (value.cantidadSalida[1][3].toString().length>7 ? 
-                                                value.cantidadSalida[1][3].toString().substring(0,2)+","+value.cantidadSalida[1][3].toString().substring(2)
-                                                    :value.cantidadSalida[1][3].toString().substring(0,1)+","+value.cantidadSalida[1][3].toString().substring(1))
-                                                :value.cantidadSalida[1][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.cantidadSalida[1][4].toString().length > 6 ? 
-                                                (value.cantidadSalida[1][4].toString().length>7 ? 
-                                                value.cantidadSalida[1][4].toString().substring(0,2)+","+value.cantidadSalida[1][4].toString().substring(2)
-                                                    :value.cantidadSalida[1][4].toString().substring(0,1)+","+value.cantidadSalida[1][4].toString().substring(1))
-                                                :value.cantidadSalida[1][4])}
-                                        </td>
+                                        <td>{parseFloat(value.cantidadSalida[1][0]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[1][1]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[1][2]).toLocaleString('en-US')}</td>
+                                        <td>{parseFloat(value.cantidadSalida[1][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[1][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -788,51 +338,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td style={{fontWeight : "bold"}}>Total Gastos</td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadSalida[2][0] === 1 ? 0 
-                                            :(value.cantidadSalida[2][0].toString().length>6? 
-                                            (value.cantidadSalida[2][0].toString().length>7? 
-                                                (value.cantidadSalida[2][0].toString().length>8? 
-                                                    value.cantidadSalida[2][0].toString().substring(0,3)+","+value.cantidadSalida[2][0].toString().substring(3)
-                                                    :value.cantidadSalida[2][0].toString().substring(0,2)+","+value.cantidadSalida[2][0].toString().substring(2))
-                                                :value.cantidadSalida[2][0].toString().substring(0,1)+","+value.cantidadSalida[2][0].toString().substring(1))
-                                            :value.cantidadSalida[2][0])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadSalida[2][1] === 1 ? 0 
-                                            :(value.cantidadSalida[2][1].toString().length>6? 
-                                            (value.cantidadSalida[2][1].toString().length>7? 
-                                                (value.cantidadSalida[2][1].toString().length>8? 
-                                                    value.cantidadSalida[2][1].toString().substring(0,3)+","+value.cantidadSalida[2][1].toString().substring(3)
-                                                    :value.cantidadSalida[2][1].toString().substring(0,2)+","+value.cantidadSalida[2][1].toString().substring(2))
-                                                :value.cantidadSalida[2][1].toString().substring(0,1)+","+value.cantidadSalida[2][1].toString().substring(1))
-                                            :value.cantidadSalida[2][1])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadSalida[2][2] === 1 ? 0 
-                                            :(value.cantidadSalida[2][2].toString().length>6? 
-                                            (value.cantidadSalida[2][2].toString().length>7? 
-                                                (value.cantidadSalida[2][2].toString().length>8? 
-                                                    value.cantidadSalida[2][2].toString().substring(0,3)+","+value.cantidadSalida[2][2].toString().substring(3)
-                                                    :value.cantidadSalida[2][2].toString().substring(0,2)+","+value.cantidadSalida[2][2].toString().substring(2))
-                                                :value.cantidadSalida[2][2].toString().substring(0,1)+","+value.cantidadSalida[2][2].toString().substring(1))
-                                            :value.cantidadSalida[2][2])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadSalida[2][3] === 1 ? 0 
-                                            :(value.cantidadSalida[2][3].toString().length>6? 
-                                            (value.cantidadSalida[2][3].toString().length>7? 
-                                                (value.cantidadSalida[2][3].toString().length>8? 
-                                                    value.cantidadSalida[2][3].toString().substring(0,3)+","+value.cantidadSalida[2][3].toString().substring(3)
-                                                    :value.cantidadSalida[2][3].toString().substring(0,2)+","+value.cantidadSalida[2][3].toString().substring(2))
-                                                :value.cantidadSalida[2][3].toString().substring(0,1)+","+value.cantidadSalida[2][3].toString().substring(1))
-                                            :value.cantidadSalida[2][3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>{value.cantidadSalida[2][4] === 4 ? 0 
-                                            :(value.cantidadSalida[2][4].toString().length>6? 
-                                            (value.cantidadSalida[2][4].toString().length>7? 
-                                                (value.cantidadSalida[2][4].toString().length>8? 
-                                                    value.cantidadSalida[2][4].toString().substring(0,3)+","+value.cantidadSalida[2][4].toString().substring(3)
-                                                    :value.cantidadSalida[2][4].toString().substring(0,2)+","+value.cantidadSalida[2][4].toString().substring(2))
-                                                :value.cantidadSalida[2][4].toString().substring(0,1)+","+value.cantidadSalida[2][4].toString().substring(1))
-                                            :value.cantidadSalida[2][4])}
-                                        </td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][0]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][1]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][2]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][3]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][4]).toLocaleString('en-US')}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -862,41 +372,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Total Utilidad</td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.utilidad[0].toString().length > 6 ? 
-                                                (value.utilidad[0].toString().length>7 ? 
-                                                value.utilidad[0].toString().substring(0,2)+","+value.utilidad[0].toString().substring(2)
-                                                    :value.utilidad[0].toString().substring(0,1)+","+value.utilidad[0].toString().substring(1))
-                                                :value.utilidad[0])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.utilidad[1].toString().length > 6 ? 
-                                                (value.utilidad[1].toString().length>7 ? 
-                                                value.utilidad[1].toString().substring(0,2)+","+value.utilidad[1].toString().substring(2)
-                                                    :value.utilidad[1].toString().substring(0,1)+","+value.utilidad[1].toString().substring(1))
-                                                :value.utilidad[1])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.utilidad[2].toString().length > 6 ? 
-                                                (value.utilidad[2].toString().length>7 ? 
-                                                value.utilidad[2].toString().substring(0,2)+","+value.utilidad[2].toString().substring(2)
-                                                    :value.utilidad[2].toString().substring(0,1)+","+value.utilidad[2].toString().substring(1))
-                                                :value.utilidad[2])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.utilidad[3].toString().length > 6 ? 
-                                                (value.utilidad[3].toString().length>7 ? 
-                                                value.utilidad[3].toString().substring(0,2)+","+value.utilidad[3].toString().substring(2)
-                                                    :value.utilidad[3].toString().substring(0,1)+","+value.utilidad[3].toString().substring(1))
-                                                :value.utilidad[3])}
-                                        </td>
-                                        <td style={{fontWeight : "bold"}}>
-                                            {(value.utilidad[4].toString().length > 6 ? 
-                                                (value.utilidad[4].toString().length>7 ? 
-                                                value.utilidad[4].toString().substring(0,2)+","+value.utilidad[4].toString().substring(2)
-                                                    :value.utilidad[4].toString().substring(0,1)+","+value.utilidad[4].toString().substring(1))
-                                                :value.utilidad[4])}
-                                        </td>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[0]).toLocaleString('en-US')}</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[1]).toLocaleString('en-US')}</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[2]).toLocaleString('en-US')}</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[3]).toLocaleString('en-US')}</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[4]).toLocaleString('en-US')}</th>
                                     </tr>
                                 ))
                                 ) : (
@@ -915,11 +395,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <th style={{fontWeight : "bold"}}>Margen Rentabilidad</th>
-                                        <th style={{fontWeight : "bold"}}>{value.rentabilidad[0]}%</th>
-                                        <th style={{fontWeight : "bold"}}>{value.rentabilidad[1]}%</th>
-                                        <th style={{fontWeight : "bold"}}>{value.rentabilidad[2]}%</th>
-                                        <th style={{fontWeight : "bold"}}>{value.rentabilidad[3]}%</th>
-                                        <th style={{fontWeight : "bold"}}>{value.rentabilidad[4]}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[0]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[1]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[2]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[3]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[4]).toLocaleString('en-US')}%</th>
                                     </tr>
                                 ))
                                 ) : (
