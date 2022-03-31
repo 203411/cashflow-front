@@ -68,6 +68,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
+            console.log(response.data)
             setFlujo(response.data);
         })
     }
@@ -94,12 +95,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (cobrar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.semana1).toLocaleString('en-US')+'.'+value.semana1.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana2).toLocaleString('en-US')+'.'+value.semana2.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana3).toLocaleString('en-US')+'.'+value.semana3.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana4).toLocaleString('en-US')+'.'+value.semana4.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana5).toLocaleString('en-US')+'.'+value.semana5.split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.semana5).toLocaleString('en-US')+'.'+value.semana5.split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -112,12 +113,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Cuentas por cobrar</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[0]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[1]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[2]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[3]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[4]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalCobrar[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[0]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[0]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[1]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[1]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[2]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[2]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[3]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[3]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[4]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[4]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalCobrar[5]).toLocaleString('en-US')+'.'+parseFloat(totalCobrar[5]).toFixed(2).split('.')[1]}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -139,12 +140,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (pagar.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.semana1).toLocaleString('en-US')+'.'+value.semana1.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana2).toLocaleString('en-US')+'.'+value.semana2.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana3).toLocaleString('en-US')+'.'+value.semana3.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana4).toLocaleString('en-US')+'.'+value.semana4.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana5).toLocaleString('en-US')+'.'+value.semana5.split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.semana5).toLocaleString('en-US')+'.'+value.semana5.split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -157,12 +158,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Cuentas por pagar</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[0]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[1]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[2]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[3]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[4]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalPagar[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[0]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[0]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[1]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[1]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[2]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[2]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[3]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[3]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[4]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[4]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalPagar[5]).toLocaleString('en-US')+'.'+parseFloat(totalPagar[5]).toFixed(2).split('.')[1]}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -184,12 +185,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (bancos.map((value) => (
                                     <tr key={value.id}>
                                         <td>{value.razon_social}</td>
-                                        <td>{parseFloat(value.semana1).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana2).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana3).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana4).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.semana5).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.semana1).toLocaleString('en-US') +'.'+value.semana1.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana2).toLocaleString('en-US') +'.'+value.semana2.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana3).toLocaleString('en-US') +'.'+value.semana3.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana4).toLocaleString('en-US') +'.'+value.semana4.split('.')[1]}</td>
+                                        <td>${parseInt(value.semana5).toLocaleString('en-US') +'.'+value.semana5.split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.semana5).toLocaleString('en-US') +'.'+value.semana5.split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -202,12 +203,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             }
                             <tr>
                                 <td style={{fontWeight : "bold"}}>Total Bancos</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[0]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[1]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[2]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[3]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[4]).toLocaleString('en-US')}</td>
-                                <td style={{fontWeight : "bold"}}>{parseFloat(totalBancos[4]).toLocaleString('en-US')}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[0]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[0]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[1]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[1]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[2]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[2]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[3]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[3]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[4]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[4]).toFixed(2).split('.')[1]}</td>
+                                <td style={{fontWeight : "bold"}}>${parseInt(totalBancos[5]).toLocaleString('en-US')+'.'+parseFloat(totalBancos[5]).toFixed(2).split('.')[1]}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -228,11 +229,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Efectivo</td>
-                                        <td>{parseFloat(value.cantidadEntrada[0][0]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[0][1]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[0][2]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[0][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[0][4]).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.cantidadEntrada[0][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[0][0]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[0][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[0][1]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[0][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[0][2]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[0][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[0][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.cantidadEntrada[0][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[0][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -247,11 +248,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Tarjeta de Crédito</td>
-                                        <td>{parseFloat(value.cantidadEntrada[1][0]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[1][1]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[1][2]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadEntrada[1][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[1][4]).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.cantidadEntrada[1][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[1][0]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[1][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[1][1]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[1][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[1][2]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadEntrada[1][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[1][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.cantidadEntrada[1][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[1][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -266,11 +267,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td style={{fontWeight : "bold"}}>Total Ingresos</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][0]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][1]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][2]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadEntrada[2][4]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadEntrada[2][0] === 1 ? "0.00" : parseInt(value.cantidadEntrada[2][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[2][0]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadEntrada[2][1] === 1 ? "0.00" : parseInt(value.cantidadEntrada[2][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[2][1]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadEntrada[2][2] === 1 ? "0.00" : parseInt(value.cantidadEntrada[2][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[2][2]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadEntrada[2][3] === 1 ? "0.00" : parseInt(value.cantidadEntrada[2][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[2][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadEntrada[2][4] === 4 ? "0.00" : parseInt(value.cantidadEntrada[2][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadEntrada[2][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -300,11 +301,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Costos de Ventas</td>
-                                        <td>{parseFloat(value.cantidadSalida[0][0]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[0][1]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[0][2]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[0][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[0][4]).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.cantidadSalida[0][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[0][0]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[0][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[0][1]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[0][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[0][2]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[0][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[0][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.cantidadSalida[0][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[0][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -319,11 +320,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td>Gastos Fijos Operativos</td>
-                                        <td>{parseFloat(value.cantidadSalida[1][0]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[1][1]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[1][2]).toLocaleString('en-US')}</td>
-                                        <td>{parseFloat(value.cantidadSalida[1][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[1][4]).toLocaleString('en-US')}</td>
+                                        <td>${parseInt(value.cantidadSalida[1][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[1][0]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[1][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[1][1]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[1][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[1][2]).toFixed(2).split('.')[1]}</td>
+                                        <td>${parseInt(value.cantidadSalida[1][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[1][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${parseInt(value.cantidadSalida[1][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[1][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -338,11 +339,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <td style={{fontWeight : "bold"}}>Total Gastos</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][0]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][1]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][2]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][3]).toLocaleString('en-US')}</td>
-                                        <td style={{fontWeight : "bold"}}>{parseFloat(value.cantidadSalida[2][4]).toLocaleString('en-US')}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadSalida[2][0] === 1 ? "0.00" : parseInt(value.cantidadSalida[2][0]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[2][0]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadSalida[2][1] === 1 ? "0.00" : parseInt(value.cantidadSalida[2][1]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[2][1]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadSalida[2][2] === 1 ? "0.00" : parseInt(value.cantidadSalida[2][2]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[2][2]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadSalida[2][3] === 1 ? "0.00" : parseInt(value.cantidadSalida[2][3]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[2][3]).toFixed(2).split('.')[1]}</td>
+                                        <td style={{fontWeight : "bold"}}>${value.cantidadSalida[2][4] === 4 ? "0.00" : parseInt(value.cantidadSalida[2][4]).toLocaleString('en-US')+'.'+parseFloat(value.cantidadSalida[2][4]).toFixed(2).split('.')[1]}</td>
                                     </tr>
                                 ))
                                 ) : (
@@ -371,12 +372,12 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                             {flujo.length > 0 ?
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
-                                        <td>Total Utilidad</td>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[0]).toLocaleString('en-US')}</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[1]).toLocaleString('en-US')}</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[2]).toLocaleString('en-US')}</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[3]).toLocaleString('en-US')}</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.utilidad[4]).toLocaleString('en-US')}</th>
+                                        <td style={{fontWeight : "bold"}}>Total Utilidad</td>
+                                        <th style={{fontWeight : "bold"}}>${parseInt(value.utilidad[0]).toLocaleString('en-US')+'.'+parseFloat(value.utilidad[0]).toFixed(2).split('.')[1]}</th>
+                                        <th style={{fontWeight : "bold"}}>${parseInt(value.utilidad[1]).toLocaleString('en-US')+'.'+parseFloat(value.utilidad[1]).toFixed(2).split('.')[1]}</th>
+                                        <th style={{fontWeight : "bold"}}>${parseInt(value.utilidad[2]).toLocaleString('en-US')+'.'+parseFloat(value.utilidad[2]).toFixed(2).split('.')[1]}</th>
+                                        <th style={{fontWeight : "bold"}}>${parseInt(value.utilidad[3]).toLocaleString('en-US')+'.'+parseFloat(value.utilidad[3]).toFixed(2).split('.')[1]}</th>
+                                        <th style={{fontWeight : "bold"}}>${parseInt(value.utilidad[4]).toLocaleString('en-US')+'.'+parseFloat(value.utilidad[4]).toFixed(2).split('.')[1]}</th>
                                     </tr>
                                 ))
                                 ) : (
@@ -395,11 +396,11 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
                                 (flujo.map((value,index) => (
                                     <tr key={index}>
                                         <th style={{fontWeight : "bold"}}>Margen Rentabilidad</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[0]).toLocaleString('en-US')}%</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[1]).toLocaleString('en-US')}%</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[2]).toLocaleString('en-US')}%</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[3]).toLocaleString('en-US')}%</th>
-                                        <th style={{fontWeight : "bold"}}>{parseFloat(value.rentabilidad[4]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseInt(value.rentabilidad[0]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseInt(value.rentabilidad[1]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseInt(value.rentabilidad[2]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseInt(value.rentabilidad[3]).toLocaleString('en-US')}%</th>
+                                        <th style={{fontWeight : "bold"}}>{parseInt(value.rentabilidad[4]).toLocaleString('en-US')}%</th>
                                     </tr>
                                 ))
                                 ) : (
