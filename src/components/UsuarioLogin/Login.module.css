@@ -29,7 +29,7 @@
 }
 
 .circleBorder{
-    position: absolute;
+    position: fixed;
     width: 60vh;
     height: 60vh;
     border-radius: 100%;

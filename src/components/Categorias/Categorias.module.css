@@ -41,3 +41,8 @@
     cursor: pointer;
     margin: 20px 20px 0 20px;
 }
+
+.msg_error{
+    font-weight: bold;
+    color: red;
+}

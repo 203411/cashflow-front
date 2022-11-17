@@ -5,7 +5,7 @@ import StyleLogin from '../UsuarioRegistro/Login.module.css';
 import './Register.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt,faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 
@@ -24,11 +24,14 @@ export default function Register() {
 
   const [listRegistro, setListRegistro] = useState([])
   const [show, setShow] = useState(false);
+  const [iconPass,setIconPass] = useState(null)
+  const [iconPass2,setIconPass2] = useState(null)
 
   const handleClose = () => setShow(false);
   const handleShow = (el) => { setShow(true); setIdRegistro(el.id) };
 
   const get_registros = () => {
+    document.getElementById("titulo").textContent = "Registro";
     axios
       .get("http://localhost:8000/cash_flow/registro/lista/", {
         headers: {
@@ -149,6 +152,7 @@ export default function Register() {
   }
 
   const rellenarForm = (idUser) => {
+    document.getElementById("titulo").textContent = "Editar usuario";
     document.getElementById("cancelar").hidden = false;  //se muestra el boton para cancelar la edicion
     axios
       .get("http://localhost:8000/cash_flow/registro/user/" + idUser.id, {
@@ -177,12 +181,31 @@ export default function Register() {
     setIsGerente(null);
     //ocultamos el boton
     document.getElementById("cancelar").hidden = true;
+    document.getElementById("titulo").textContent = "Registro";
   }
 
   const inputStyle = {
     borderRadius: '100px',
-    padding: '18px 52px'
+    padding: '18px 52px',
   };
+
+  const verContrasenia = () => {
+    if (iconPass === null || iconPass=== false){
+        setIconPass(true)
+      } else {
+        setIconPass(false)
+    }
+    return iconPass
+  }
+
+  const verContrasenia2 = () => {
+    if (iconPass2 === null || iconPass2=== false){
+        setIconPass2(true)
+      } else {
+        setIconPass2(false)
+    }
+    return iconPass2
+  }
 
   return (
     <div className={StyleLogin.body}>
@@ -223,7 +246,7 @@ export default function Register() {
         </button></Link>
       </div>
       <div className={StyleLogin.container}>
-        <h2 className={StyleLogin.title}>Registro</h2>
+        <h2 className={StyleLogin.title} id="titulo"></h2>
         <Form className="form" onSubmit={(e) => submitForm(e)}>
           <FormGroup>
             <Input
@@ -259,9 +282,10 @@ export default function Register() {
             </FormFeedback>
           </FormGroup>
           <FormGroup>
+            <FontAwesomeIcon style={{position:"relative",top:"30px",left:"20px"}} icon={iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={() => verContrasenia()} id={StyleLogin.passIcon} />
             <Input
               style={inputStyle}
-              type="password"
+              type= {iconPass === true ? "text" : "password"} 
               name="password"
               id="password"
               placeholder="Contraseña"
@@ -270,9 +294,10 @@ export default function Register() {
             />
           </FormGroup>
           <FormGroup>
+            <FontAwesomeIcon style={{position:"relative",top:"30px",left:"20px"}} icon={iconPass === true ? faUnlock : faLock} className={StyleLogin.icon} onClick={() => verContrasenia2()} id={StyleLogin.passIcon} />
             <Input
               style={inputStyle}
-              type="password"
+              type={iconPass2 === true ? "text" : "password"} 
               name="password2"
               id="password2"
               placeholder="Confirmar Contraseña"

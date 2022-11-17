@@ -35,11 +35,24 @@ export default function Indicadores() {
     useEffect(() => {
         get_indicadores();
         get_fecha();
+        validarData();
     }, []);
+
+    useEffect(() => {
+        validarData();
+    }, [razon_social,tipo,monto]);
 
     useEffect(() => {
         rellenarForm(id);
     }, [id]);
+
+    const validarData = () =>{
+        if((razon_social!== null && razon_social!== "") && (tipo !== null && tipo !== "") && (monto!== null && monto !== "")){
+            document.getElementById("btn_register").disabled = false
+        }else{
+            document.getElementById("btn_register").disabled = true
+        }
+    }
 
     const get_fecha = () => {
         let semana;
@@ -61,23 +74,37 @@ export default function Indicadores() {
         document.getElementById("semana").value = semana
     }
     const agregar_indicadores = () => {
-        const data = {
-            razon_social: razon_social,
-            monto: monto,
-            tipo: tipo
+        let mensaje = ""
+        if (razon_social === null || razon_social === ""){
+            mensaje += "Ingrese una razon social\n"
         }
-
-        axios.post("http://localhost:8000/cash_flow/indicadores/dinero/" + num_semana, data, {
-            headers: {
-                'Authorization': 'Token ' + token,
+        if (monto === null || monto === ""){
+            mensaje += "Ingrese un monto\n"
+        }
+        if (tipo === null || tipo === ""){
+            mensaje += "Seleccione un tipo de indicador válido\n"
+        }
+        if(mensaje === ""){
+            const data = {
+                razon_social: razon_social,
+                monto: monto,
+                tipo: tipo
             }
-        }).then((response) => {
-            get_indicadores()
-        }).catch((error) => {
-            console.log(error.response)
-            alert("No se pudo agregar")
-        })
-
+    
+            axios.post("http://localhost:8000/cash_flow/indicadores/dinero/" + num_semana, data, {
+                headers: {
+                    'Authorization': 'Token ' + token,
+                }
+            }).then((response) => {
+                get_indicadores()
+            }).catch((error) => {
+                console.log(error.response)
+                alert("No se pudo agregar")
+            })
+        }else{
+            document.getElementById("btn_register").disabled = true
+            alert(mensaje)
+        }
     }
     const rellenarForm = (id) => {
         axios.get("http://localhost:8000/cash_flow/indicadores/dinero/" + id, {
@@ -89,6 +116,39 @@ export default function Indicadores() {
             document.getElementById("razon_social").value = response.data.razon_social
             setRazonSocial(response.data.razon_social)
         })
+    }
+
+    const guardarMonto = (e) =>{
+        const expRegular = /^([0-9]{1,18}(\.[0-9]{1,2})?)$/;
+        document.getElementById("msg_monto").textContent = ""
+        if(expRegular.test(e.target.value)){
+            if(parseFloat(e.target.value) >= 0.01){
+                setMonto(e.target.value)
+            }else{
+                setMonto(null)
+            }
+        }else{
+            document.getElementById("msg_monto").textContent = "Ingrese un dato válido para el monto"
+            setMonto(null)
+        }
+    }
+
+    const validarTipo = (e) =>{
+        document.getElementById("msg_tipo").textContent = ""
+        if(e.target.value !== 'Seleccione una opcion'){
+            setTipo(e.target.value)
+        }else{
+            document.getElementById("msg_tipo").textContent = "Ingrese un tipo válido"
+        }
+    }
+
+    const validarRazon = (e) =>{
+        document.getElementById("msg_razon").textContent = ""
+        if(e.target.value !== ''){
+            setRazonSocial(e.target.value)
+        }else{
+            document.getElementById("msg_razon").textContent = "Ingrese una razon social"
+        }
     }
 
     return (
@@ -109,7 +169,7 @@ export default function Indicadores() {
                     </div>
                     <div className='col-sm-5'>
                         <label>Tipo de Indicador:</label>
-                        <select class="custom-select" onChange={(e) => setTipo(e.target.value === 'Seleccione una opcion' ? null : e.target.value)} id="tipo">
+                        <select class="custom-select" onBlur={(e) => validarTipo(e)} onChange={(e) => validarTipo(e)} id="tipo">
                             <option selected>Seleccione una opcion</option>
                             {optionIndicador.length > 0 ?
                                 (optionIndicador.map((value) =>
@@ -119,13 +179,15 @@ export default function Indicadores() {
                                 )
                             }
                         </select>
+                    <p id="msg_tipo" className={CategoriaCss.msg_error}></p>
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-2 mt-2" controlId="formBasicPassword">
                     <label>Razon Social:</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" onChange={(e) => setRazonSocial(e.target.value)} placeholder="Razon social o descripcion del movimiento " aria-label="Amount (to the nearest dollar)" id="razon_social" />
+                        <input type="text" class="form-control" onBlur={(e) => validarRazon(e)} onChange={(e) => validarRazon(e)} placeholder="Razon social o descripcion del movimiento " aria-label="Amount (to the nearest dollar)" id="razon_social" required/>
                     </div>
+                    <p id="msg_razon" className={CategoriaCss.msg_error}></p>
                 </Form.Group>
                 <Form.Group className="mb-2 mt-2" controlId="formBasicPassword" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <div className='col-sm-5'>
@@ -134,11 +196,12 @@ export default function Indicadores() {
                             <div className="input-group-prepend">
                                 <span className="input-group-text">$</span>
                             </div>
-                            <input type="number" className="form-control" onChange={(e) => setMonto(e.target.value)} placeholder="Monto " aria-label="Amount (to the nearest dollar)" />
+                            <input type="number" className="form-control" onBlur={(e) => guardarMonto(e)} onChange={(e) => guardarMonto(e)} placeholder="Monto " aria-label="Amount (to the nearest dollar)"/>
                         </div>
+                            <p id="msg_monto" className={CategoriaCss.msg_error}></p>
                     </div>
                     <div className='col-sm-5' style={{ textAlign: 'Center' }}>
-                        <Button onClick={() => agregar_indicadores()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg">Registrar</Button>
+                        <Button onClick={() => agregar_indicadores()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg" id="btn_register">Registrar</Button>
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -183,7 +246,7 @@ export default function Indicadores() {
                     </Table>
                 </Form.Group>
             </Form>
-            <div style={{ position: "absolute", left: "0" }}>
+            <div style={{ position: "fixed", left: "0", paddingTop:"20px" }}>
                 <Link to="/home"><button style={{ padding: "15px 40px", fontSize: "16px", borderRadius: "30px", border: "none", background: "#dadada", cursor: "pointer", margin: "0 20px 0 20px" }}>
                     Home
                 </button></Link>

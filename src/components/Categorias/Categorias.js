@@ -44,11 +44,11 @@ export default function Categorias() {
     const optionCategoria = ['INGRESO', 'COSTO-VENTA', 'GASTO-AOC']
 
     const agregar_categoria = () => {
-        if (categoria === "" && subCategoria === "") {
+        if ((categoria === "" || categoria === null)&&(subCategoria === "" || subCategoria === null)) {
             alert("Debes rellenar todos los campos")
-        } else if (categoria === "") {
+        } else if (categoria === "" || categoria === null) {
             alert("El campo categoria no puede estar vacio")
-        } else if (subCategoria === "") {
+        } else if (subCategoria === "" || subCategoria === null) {
             alert("El campo sub-categoria no puede estar vacio")
         } else {
             var postData = {
@@ -186,7 +186,7 @@ export default function Categorias() {
                                 ))
                                 ) : (
                                     <tr>
-                                        <td>
+                                        <td style={{width: "94vh", height:"42vh",textAlign:"center",padding:"20%"}}>
                                             Sin datos
                                         </td>
                                     </tr>

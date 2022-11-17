@@ -1,7 +1,7 @@
 import { Component } from "react";
 import MenuCss from "./Menu.module.css"
 import StyleLogin from "../UsuarioLogin/Login.module.css"
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default class Menu extends Component {
 
 
@@ -16,7 +16,6 @@ export default class Menu extends Component {
     render() {
         return (
             <div className={MenuCss.body}>
-                {/* <Outlet/> */}
                 <div className={MenuCss.container}>
                     {this.state.isManager === "true" ? <Manager /> : (this.state.isManager === "false" ? <Worker /> : <div><h1>Sin acceso</h1></div>)}
                 </div>

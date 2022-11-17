@@ -21,7 +21,7 @@ export const ReporteIndicadores = React.forwardRef((props,ref) =>{
     },[props])
 
     useEffect(()=>{
-        if(mes!=0){
+        if(mes>=1 && mes<=12){
             get_cobrar();
             get_pagar();
             get_bancos();

@@ -15,7 +15,6 @@ export default function FlujoEfectivo() {
     const [tipo, setTipo] = useState('');
 
     const [listFlujos, setListFlujos] = useState([]);
-    // const [listCategorias, setListCategorias] = useState([]);
     const [listC, setListC] = useState([]);
 
     const token = localStorage.getItem('tokenLocal');
@@ -23,6 +22,10 @@ export default function FlujoEfectivo() {
 
     const [categoriaEntrada, setCategoriaEntrada] = useState([]);
     const [categoriaSalida, setCategoriaSalida] = useState([]);
+
+    useEffect(() => {
+        validarData();
+    }, [categoria,tipo,cantidad,descripcion]);
 
     const get_flujos = () => {
         axios.get("http://localhost:8000/cash_flow/flujo/efectivo", {
@@ -33,7 +36,7 @@ export default function FlujoEfectivo() {
             setListFlujos(response.data);
 
         }).catch((error) => {
-            alert("No se obtuvieron los registros");
+            alert("No se obtuvieron registros");
         })
     }
 
@@ -64,31 +67,97 @@ export default function FlujoEfectivo() {
     }, []);
 
     const agregar_flujos = () => {
-
-        const data = {
-            id_categoria: categoria,
-            descripcion: descripcion,
-            cantidad: cantidad,
-            tipo: tipo
+        let mensaje = ""
+        if (categoria === null || categoria === ""){
+            mensaje += "Seleccione una categoria\n"
         }
-
-        axios.post("http://localhost:8000/cash_flow/flujo/efectivo", data, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token,
+        if (cantidad === null || cantidad === ""){
+            mensaje += "Ingrese un cantidad\n"
+        }
+        if (tipo === null || tipo === ""){
+            mensaje += "Seleccione un tipo de flujo válido\n"
+        }
+        if (descripcion === null || descripcion === ""){
+            mensaje += "El campo descripcion no puede ser vacio\n"
+        }
+        if(mensaje === ""){
+            const data = {
+                id_categoria: categoria,
+                descripcion: descripcion,
+                cantidad: cantidad,
+                tipo: tipo
             }
-        }).then((response) => {
-            console.log(response.data)
-            alert("Guardado")
-            get_flujos();
-        }).catch((error) => {
-            console.log(error.response.data)
-            alert("No se pudo agregar")
-        })
+
+
+
+            axios.post("http://localhost:8000/cash_flow/flujo/efectivo", data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + token,
+                }
+            }).then((response) => {
+                console.log(response.data)
+                alert("Guardado")
+                get_flujos();
+            }).catch((error) => {
+                console.log(error.response.data)
+                alert("No se pudo agregar")
+            })
+        }else{
+        
+            document.getElementById("btn_register").disabled = true
+            alert(mensaje)
+        
+        }
+    }
+
+    const validarData = () =>{
+        if((categoria!== null && categoria!== "") && (tipo !== null && tipo !== "") && (cantidad!== null && cantidad !== "") && (descripcion!==null &&descripcion!=="")){
+            document.getElementById("btn_register").disabled = false
+        }else{
+            document.getElementById("btn_register").disabled = true
+        }
+        console.log("ct: ",categoria," t: ",tipo," ca: ",cantidad," d: ",descripcion)
+    }
+
+    const validarTipo = (e) =>{
+        document.getElementById("msg_tipo").textContent = ""
+        document.getElementById("msg_categoria").textContent = ""
+        if(e.target.value !== ''){
+            setTipo(e.target.value)
+            setCategoria(document.getElementById("s_categoria").value)
+        }else{
+            setTipo(null)
+            setCategoria(null)
+            document.getElementById("msg_tipo").textContent = "Ingrese un tipo válido"
+            document.getElementById("msg_categoria").textContent = "Ingrese un tipo válido"
+        }
+        if (e.target.value === "Entrada"){
+            setListC(categoriaEntrada)
+        }else if(e.target.value === "Salida"){
+            setListC(categoriaSalida)
+        }else{
+            setListC([])
+        }
+    }
+
+    const validarCantidad = (e) => {
+        const expRegular = /^([0-9]{1,18}(\.[0-9]{1,2})?)$/;
+        document.getElementById("msg_cantidad").textContent = ""
+        if(expRegular.test(e.target.value)){
+            if(parseFloat(e.target.value) >= 0.01){
+                setCantidad(e.target.value)
+            }else{
+                setCantidad(null)
+            }
+        }else{
+            document.getElementById("msg_cantidad").textContent = "Ingrese un dato válido para la cantidad"
+            setCantidad(null)
+        }
     }
 
     return (
-        <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)' }}>
+        <div className="d-md-flex justify-content-center " style={{ background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(60,49,79,1) 16%, rgba(0,212,255,1) 62%)', minHeight: "100vh" }}>
             <Form className='mt-1 pb-3' style={{ background: 'white', padding: '1%', borderRadius: '10px' }}>
                 <Form.Group className="mb-4 mt-2" controlId="formBasicPassword">
                     <div style={{ textAlign: 'center', fontSize: 'x-large' }}>Flujo Efectivo</div>
@@ -97,17 +166,18 @@ export default function FlujoEfectivo() {
                     <div className='col-sm-5'>
                         <label>Tipo:</label>
                         <div className="input-group mb-0">
-                            <select className="custom-select" onChange={(e) => { setTipo(e.target.value === "" ? null : e.target.value); { e.target.value === "Entrada" ? setListC(categoriaEntrada) : (e.target.value === "Salida" ? setListC(categoriaSalida) : setListC([])) } }}>
+                            <select className="custom-select" onBlur={(e) => validarTipo(e)} onChange={(e) => validarTipo(e)}>
                                 <option value={""}>Selecciona tipo movimiento</option>
                                 <option value={"Entrada"}>Entrada</option>
                                 <option value={"Salida"}>Salida</option>
                             </select>
                         </div>
+                        <p id="msg_tipo" className={CategoriaCss.msg_error}></p>
                     </div>
                     <div className='col-sm-5'>
                         <label>Categoria:</label>
                         <div className="input-group mb-0">
-                            <select className="custom-select" onChange={(e) => setCategoria(e.target.value)}>
+                            <select id="s_categoria" className="custom-select" onChange={(e) => setCategoria(e.target.value)} onBlur={(e) => setCategoria(e.target.value)}>
                                 {listC.length > 0 ?
                                     (listC.map((el) => (<SelectsCategorias
                                         key={el.id}
@@ -119,6 +189,7 @@ export default function FlujoEfectivo() {
                                 }
                             </select>
                         </div>
+                        <p id="msg_categoria" className={CategoriaCss.msg_error}></p>
                     </div>
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
@@ -134,11 +205,12 @@ export default function FlujoEfectivo() {
                         <label>Cantidad:</label>
                         <div className="input-group">
                             <span className="input-group-text">$</span>
-                            <input type="number" className="form-control" onChange={(e) => setCantidad(e.target.value)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" min={"1"} max={"9999999.99"} step={"0.01"} />
+                            <input type="number" className="form-control" onChange={(e) => validarCantidad(e)} onBlur={(e) => validarCantidad(e)} placeholder="Cantidad " aria-label="Amount (to the nearest dollar)" min={"1"} max={"9999999.99"} step={"0.01"} />
                         </div>
+                        <p id="msg_cantidad" className={CategoriaCss.msg_error}></p>                        
                     </div>
                     <div style={{ textAlign: 'Center' }} className='col-sm-5'>
-                        <Button onClick={() => agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg">Registrar</Button>
+                        <Button id="btn_register" onClick={() => agregar_flujos()} style={{ borderRadius: '100px', boxShadow: 'none', paddingLeft: '10%', paddingRight: '10%' }} size="lg">Registrar</Button>
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-0" controlId="formBasicPassword">
@@ -163,7 +235,7 @@ export default function FlujoEfectivo() {
                                 />))
                                 ) : (
                                     <tr>
-                                        <td>
+                                        <td style={{width: "119vh",textAlign:"center",padding:"16%"}}>
                                             Sin datos
                                         </td>
                                     </tr>
@@ -180,6 +252,4 @@ export default function FlujoEfectivo() {
             </div>
         </div>
     );
-
 }
-
